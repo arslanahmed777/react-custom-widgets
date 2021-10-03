@@ -1,34 +1,15 @@
 import React, { useState } from "react";
 import Pagination from "../components/Pagination/Pagination";
 import Paginate from "../utils/Paginate";
-const Mymovies = [
-  { id: 1, name: "Men in Black" },
-  { id: 2, name: "Terminator" },
-  { id: 3, name: "Godzilla" },
-  { id: 4, name: "Superman" },
-  { id: 5, name: "Hot fuzz" },
-  { id: 6, name: "Men in Black" },
-  { id: 7, name: "Terminator" },
-  { id: 8, name: "Godzilla" },
-  { id: 9, name: "Superman" },
-  { id: 10, name: "Hot fuzz" },
-  { id: 11, name: "Men in Black" },
-  { id: 12, name: "Terminator" },
-  { id: 13, name: "Godzilla" },
-  { id: 14, name: "Superman" },
-  { id: 15, name: "Hot fuzz" },
-  { id: 16, name: "Men in Black" },
-  { id: 17, name: "Terminator" },
-  { id: 18, name: "Godzilla" },
-  { id: 19, name: "Superman" },
-];
+import Mymovies from "./MoviesData";
 
 const PaginationPage = (props) => {
   const [currentpage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(5);
   const [movies, setMovies] = useState(Mymovies);
 
   const handlePageChange = (page) => {
+    console.log(page);
     setCurrentPage(page);
   };
   const sss = Paginate(movies, currentpage, pageSize);
