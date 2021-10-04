@@ -12,31 +12,43 @@ const Pagination = (props) => {
   useEffect(() => {
     setThisPage(currentPage);
     let tempNumberOfPages = [...pages];
-    if (currentPage === pages.length - 2 && currentPage < pages.length) {
+    if (currentPage % 2 !== 0) {
       tempNumberOfPages = tempNumberOfPages.slice(
         currentPage - 1,
         currentPage + 2
       );
-      tempNumberOfPages = [...tempNumberOfPages];
-    } else if (currentPage === pages.length) {
-      tempNumberOfPages = tempNumberOfPages.slice(
-        currentPage - 1,
-        currentPage + 1
-      );
-      tempNumberOfPages = ["...", ...tempNumberOfPages];
-    } else {
-      tempNumberOfPages = tempNumberOfPages.slice(
-        currentPage - 1,
-        currentPage + 2
-      );
+      console.log("tmparr", tempNumberOfPages);
       tempNumberOfPages = [...tempNumberOfPages, "...", pages.length];
+    } else {
+      tempNumberOfPages = [
+        1,
+        currentPage,
+        currentPage + 1,
+        "...",
+        pages.length,
+      ];
     }
 
-    // if (currentPage === 2) {
-    //   tempNumberOfPages = [...pages];
-    //   tempNumberOfPages = tempNumberOfPages.slice(2, 4);
-    //   tempNumberOfPages = ["...", ...tempNumberOfPages, "...", pages.length];
+    // if (currentPage === pages.length - 2 && currentPage < pages.length) {
+    //   tempNumberOfPages = tempNumberOfPages.slice(
+    //     currentPage - 1,
+    //     currentPage + 2
+    //   );
+    //   tempNumberOfPages = [...tempNumberOfPages];
+    // } else if (currentPage === pages.length) {
+    //   tempNumberOfPages = tempNumberOfPages.slice(
+    //     currentPage - 1,
+    //     currentPage + 1
+    //   );
+    //   tempNumberOfPages = ["...", ...tempNumberOfPages];
+    // } else {
+    //   tempNumberOfPages = tempNumberOfPages.slice(
+    //     currentPage - 1,
+    //     currentPage + 2
+    //   );
+    //   tempNumberOfPages = [...tempNumberOfPages, "...", pages.length];
     // }
+
     setArrOfCurrBtns(tempNumberOfPages);
   }, [currentPage]);
   return (
