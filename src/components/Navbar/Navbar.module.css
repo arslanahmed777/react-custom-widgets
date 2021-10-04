@@ -1,3 +1,12 @@
-.mybtn{
-    background-color: red;
-}
+.navbar {
+    background-color: #060b26;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  .menu_bars {
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
+  }
