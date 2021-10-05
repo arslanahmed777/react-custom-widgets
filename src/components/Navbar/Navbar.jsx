@@ -10,9 +10,12 @@ const Navbar = () => {
   return (
     <>
       <div className={Navbarcss.navbar}>
-        <Link onClick={showSidebar} to="#" className={Navbarcss.menu_bars}>
+        <span
+          onClick={showSidebar}
+          className={`cpointer ${Navbarcss.menu_bars}`}
+        >
           <FaBars size={32} color={"white"} />
-        </Link>
+        </span>
       </div>
       <nav
         className={`${Navbarcss.navmenu} ${sidebar ? Navbarcss.active : ""} `}
