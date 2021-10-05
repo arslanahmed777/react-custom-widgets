@@ -1,29 +1,44 @@
+import React from 'react'
 import { Route, Switch } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import HomePage from "./Pages/HomePage";
-import PaginationPage from "./Pages/PaginationPage";
-import SigninSignupPage from "./Pages/SigninSignupPage";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
+import './App.css'
+const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
+const HomePage = React.lazy(() => import("./Pages/HomePage"));
+const PaginationPage = React.lazy(() => import("./Pages/PaginationPage"));
+const SigninSignupPage = React.lazy(() => import("./Pages/SigninSignupPage"));
+const ProtectedRoute = React.lazy(() => import("./components/ProtectedRoute/ProtectedRoute"));
+
+
 function App() {
 
   return (
     <>
-      <Navbar />
-      <Switch>
+      <React.Suspense
+        fallback={
+          <div className="dashboardBlurImage">
+            <center>
+              <h4>Medifusion is loading, Please wait...</h4>
+            </center>
+          </div>
+        }
+      >
+        <Navbar />
+        <Switch>
 
-        <Route exact path="/login">
-          <SigninSignupPage />
-        </Route>
-        <ProtectedRoute exact path="/">
-          <HomePage />
-        </ProtectedRoute>
+          <Route exact path="/login">
+            <SigninSignupPage />
+          </Route>
+          <ProtectedRoute exact path="/">
+            <HomePage />
+          </ProtectedRoute>
 
-        <ProtectedRoute exact path="/pagination">
-          <PaginationPage />
-        </ProtectedRoute>
+          <ProtectedRoute exact path="/pagination">
+            <PaginationPage />
+          </ProtectedRoute>
 
 
-      </Switch>
+        </Switch>
+      </React.Suspense>
     </>
   );
 }

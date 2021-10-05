@@ -21,13 +21,23 @@ const Signup = (props) => {
             <div className="row ">
               <div>
                 <div className="form-floating mb-3">
-                  <input type="text" className="form-control " id="username" />
+                  <input
+                    type="text"
+                    className="form-control "
+                    placeholder="username"
+                    id="username"
+                  />
                   <label htmlFor="username">Username</label>
                 </div>
               </div>
               <div className="col-12">
                 <div className="form-floating mb-3">
-                  <input type="email" className="form-control " id="email" />
+                  <input
+                    type="email"
+                    className="form-control "
+                    placeholder="Email"
+                    id="email"
+                  />
                   <label htmlFor="email">Email address</label>
                 </div>
               </div>
@@ -36,15 +46,16 @@ const Signup = (props) => {
                   <input
                     type="password"
                     className="form-control"
+                    placeholder="Password"
                     id="password"
                   />
                   <label htmlFor="password">Password</label>
                 </div>
               </div>
               <div className="col-12">
-                <div class="d-grid gap-2">
-                  <button class="btn btn-primary" type="submit">
-                    Sign in
+                <div className="d-grid gap-2">
+                  <button className="btn btn-primary" type="submit">
+                    Sign up
                   </button>
                 </div>
               </div>
@@ -54,7 +65,7 @@ const Signup = (props) => {
                     Have already an Account?
                     <span
                       onClick={handleChangeComponent}
-                      className="ms-2 fw-bold pe-auto"
+                      className="ms-2 fw-bold cpointer"
                     >
                       Login
                     </span>

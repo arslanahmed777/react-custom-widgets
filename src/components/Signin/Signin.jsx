@@ -1,8 +1,8 @@
 import React from "react";
 
 const Signin = (props) => {
-  const handleChangeComponent = () => {
-    props.setselectedComponent("Signup");
+  const handleChangeComponent = (component) => {
+    props.setselectedComponent(component);
   };
   return (
     <>
@@ -37,24 +37,28 @@ const Signin = (props) => {
                 />
               </div>
 
-              <button
-                className="btn btn-lg btn-primary btn-block"
-                type="submit"
-              >
-                Sign in
-              </button>
+              <div className="d-grid gap-2">
+                <button className="btn btn-primary" type="submit">
+                  Sign in
+                </button>
+              </div>
               <div className="mt-4">
                 <div className="d-flex justify-content-center links">
                   Don't have an account?
                   <span
-                    onClick={handleChangeComponent}
-                    className="ms-2 fw-bold"
+                    onClick={() => handleChangeComponent("Signup")}
+                    className="ms-2 fw-bold cpointer"
                   >
                     Sign Up
                   </span>
                 </div>
                 <div className="d-flex justify-content-center links">
-                  <span className="fw-bold">Forgot your password?</span>
+                  <span
+                    onClick={() => handleChangeComponent("forgotpassword")}
+                    className="fw-bold cpointer"
+                  >
+                    Forgot your password?
+                  </span>
                 </div>
               </div>
             </div>

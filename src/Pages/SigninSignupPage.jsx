@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import Signin from "../components/Signin/Signin";
-import Signup from "../components/Signup/Signup";
+
+const Signin = React.lazy(() => import("../components/Signin/Signin"));
+const Signup = React.lazy(() => import("../components/Signup/Signup"));
+const ForgotPassword = React.lazy(() =>
+  import("../components/ForgotPassword/ForgotPassword")
+);
 
 const SigninSignupPage = () => {
   const [selectedComponent, setselectedComponent] = useState("Signin");
@@ -8,8 +12,10 @@ const SigninSignupPage = () => {
     <div className="container-fluid border" style={{ height: "90vh" }}>
       {selectedComponent == "Signin" ? (
         <Signin setselectedComponent={setselectedComponent} />
+      ) : selectedComponent == "Signup" ? (
+        <Signup setselectedComponent={setselectedComponent} />
       ) : (
-        <Signup />
+        <ForgotPassword setselectedComponent={setselectedComponent} />
       )}
     </div>
   );
