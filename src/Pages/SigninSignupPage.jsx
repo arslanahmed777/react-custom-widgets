@@ -10,9 +10,9 @@ const SigninSignupPage = () => {
   const [selectedComponent, setselectedComponent] = useState("Signin");
   return (
     <div className="container-fluid border" style={{ height: "90vh" }}>
-      {selectedComponent == "Signin" ? (
+      {selectedComponent === "Signin" ? (
         <Signin setselectedComponent={setselectedComponent} />
-      ) : selectedComponent == "Signup" ? (
+      ) : selectedComponent === "Signup" ? (
         <Signup setselectedComponent={setselectedComponent} />
       ) : (
         <ForgotPassword setselectedComponent={setselectedComponent} />
