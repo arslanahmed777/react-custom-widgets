@@ -2,17 +2,27 @@ import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./Pages/HomePage";
 import PaginationPage from "./Pages/PaginationPage";
+import SigninSignupPage from "./Pages/SigninSignupPage";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 function App() {
+
   return (
     <>
       <Navbar />
       <Switch>
-        <Route exact path="/">
+
+        <Route exact path="/login">
+          <SigninSignupPage />
+        </Route>
+        <ProtectedRoute exact path="/">
           <HomePage />
-        </Route>
-        <Route path="/pagination">
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/pagination">
           <PaginationPage />
-        </Route>
+        </ProtectedRoute>
+
+
       </Switch>
     </>
   );
