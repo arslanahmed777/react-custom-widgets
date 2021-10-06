@@ -6,7 +6,7 @@ const ForgotPassword = React.lazy(() =>
   import("../components/ForgotPassword/ForgotPassword")
 );
 
-const SigninSignupPage = () => {
+const SigninSignupPage = (props) => {
   const [selectedComponent, setselectedComponent] = useState("Signin");
   return (
     <div className="container-fluid border" style={{ height: "90vh" }}>

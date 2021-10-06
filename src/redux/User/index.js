@@ -36,6 +36,7 @@ const UserReducer = (state = INITIAL_STATE, action) => {
         loading: false
       }
 
+
     default:
       return state
   }

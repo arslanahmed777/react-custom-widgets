@@ -1,6 +1,7 @@
 import React from 'react'
-import { Route, Switch } from "react-router-dom";
-
+import { Route, Switch, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from './redux/User/User.Selectors';
 import './App.css'
 const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
 const HomePage = React.lazy(() => import("./Pages/HomePage"));
@@ -10,6 +11,7 @@ const ProtectedRoute = React.lazy(() => import("./components/ProtectedRoute/Prot
 
 
 function App() {
+  const currentUser = useSelector(selectCurrentUser);
 
   return (
     <>
@@ -25,16 +27,17 @@ function App() {
         <Navbar />
         <Switch>
 
-          <Route exact path="/login">
-            <SigninSignupPage />
-          </Route>
-          <ProtectedRoute exact path="/">
+          <Route exact path="/login" render={() => !currentUser ? <SigninSignupPage /> : <Redirect to="/" />} />
+
+          <Route exact path="/" render={() => currentUser ? <HomePage /> : <Redirect to="/login" />} />
+          <Route exact path="/pagination" render={() => currentUser ? <PaginationPage /> : <Redirect to="/login" />} />
+          {/* <ProtectedRoute exact path="/">
             <HomePage />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/pagination">
             <PaginationPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
 
         </Switch>

@@ -1,14 +1,17 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/User/User.Selectors";
 
 const ProtectedRoute = ({ children, ...rest }) => {
-  const token = false;
-  console.log(children);
+  const currentUser = useSelector(selectCurrentUser);
+
+  console.log(currentUser);
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        token ? (
+        currentUser ? (
           children
         ) : (
           <Redirect
