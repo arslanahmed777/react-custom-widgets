@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { callPublicApi } from "../../utils/call-api";
+import { useDispatch, useSelector } from "react-redux";
+import { emailSignInStart } from "../../redux/User/UserActions";
+import { selectUserErrors } from "../../redux/User/User.Selectors";
 
 const Signin = (props) => {
+  const dispatch = useDispatch();
+  const error = useSelector(selectUserErrors);
+  const [userobj, setUserobj] = useState({ email: "", password: "" });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserobj({ ...userobj, [name]: value });
+  };
+
+  const handleSignin = async (e) => {
+    e.preventDefault();
+    try {
+      // const data = await callPublicApi("signin", "POST", userobj);
+      // console.log(data);
+      dispatch(emailSignInStart(userobj));
+    } catch (err) {
+      console.log("ERROR", err);
+    }
+  };
+
   const handleChangeComponent = (component) => {
     props.setselectedComponent(component);
   };
   return (
     <>
-      <form className="h-100">
+      <form onSubmit={(e) => handleSignin(e)} className="h-100">
         <div className="row align-items-center justify-content-center h-100">
           <div className="col-md-4 col-12  ">
             <div className="text-center">
@@ -22,8 +45,11 @@ const Signin = (props) => {
                 <input
                   type="email"
                   id="inputEmail"
+                  name="email"
                   className="form-control"
                   placeholder="Email address"
+                  value={userobj.email}
+                  onChange={(e) => handleInputChange(e)}
                   required
                 />
               </div>
@@ -31,11 +57,15 @@ const Signin = (props) => {
                 <input
                   type="password"
                   id="inputPassword"
+                  name="password"
                   className="form-control"
                   placeholder="Password"
+                  value={userobj.password}
+                  onChange={(e) => handleInputChange(e)}
                   required
                 />
               </div>
+              <h1>{error && error}</h1>
 
               <div className="d-grid gap-2">
                 <button className="btn btn-primary" type="submit">

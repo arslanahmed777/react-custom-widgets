@@ -8,6 +8,9 @@ import {
   signUpFailure,
   signUpSuccess,
 } from "./UserActions";
+
+import { callPublicApi } from "../../utils/call-api";
+
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
     yield put(signInSuccess("df"));
@@ -15,12 +18,13 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     yield put(signInFailure(e.message));
   }
 }
-export function* signInWithEmail({ payload: { email, password } }) {
+export function* signInWithEmail(data) {
+  console.log("signInWithEmail saga run", data);
   try {
     const user = null;
-    yield getSnapshotFromUserAuth(user);
+    yield call(callPublicApi, "signin", "post", data)
   } catch (e) {
-    yield put(signInFailure(e.message));
+    // yield put(signInFailure(e.message));
   }
 }
 
