@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { callPublicApi } from "../../utils/call-api";
 import { useDispatch, useSelector } from "react-redux";
 import { emailSignInStart } from "../../redux/User/UserActions";
-import { selectUserErrors } from "../../redux/User/User.Selectors";
+import { selectUserLoadingState } from "../../redux/User/User.Selectors";
+import ButtonLoader from "../ButtonLoader/ButtonLoader";
 
 const Signin = (props) => {
   const dispatch = useDispatch();
-  const error = useSelector(selectUserErrors);
+  const loading = useSelector(selectUserLoadingState);
   const [userobj, setUserobj] = useState({ email: "", password: "" });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +16,6 @@ const Signin = (props) => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      // const data = await callPublicApi("signin", "POST", userobj);
-      // console.log(data);
       dispatch(emailSignInStart(userobj));
     } catch (err) {
       console.log("ERROR", err);
@@ -29,7 +27,7 @@ const Signin = (props) => {
   };
   return (
     <>
-      <form onSubmit={(e) => handleSignin(e)} className="h-100">
+      <form onSubmit={(e) => handleSignin(e)}>
         <div className="row align-items-center justify-content-center h-100">
           <div className="col-md-4 col-12  ">
             <div className="text-center">
@@ -65,11 +63,10 @@ const Signin = (props) => {
                   required
                 />
               </div>
-              <h1>{error && error}</h1>
 
               <div className="d-grid gap-2">
                 <button className="btn btn-primary" type="submit">
-                  Sign in
+                  {loading ? <ButtonLoader /> : "Sign in"}
                 </button>
               </div>
               <div className="mt-4">
