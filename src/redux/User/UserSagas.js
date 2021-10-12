@@ -40,12 +40,14 @@ export function* signOut() {
   }
 }
 
-export function* signUp({ payload: { displayName, email, password } }) {
-  try {
-    yield put(signUpSuccess("SD"));
-  } catch (e) {
-    yield put(signUpFailure(e.message));
-  }
+export function* signUp({ payload }) {
+  const response = yield call(callPublicApi, "signup", "post", payload);
+  console.log(response);
+  // try {
+  //   yield put(signUpSuccess("SD"));
+  // } catch (e) {
+  //   yield put(signUpFailure(e.message));
+  // }
 }
 export function* signInAfterSignUp({ payload: { user, additionalData } }) {
   yield getSnapshotFromUserAuth(user, additionalData);

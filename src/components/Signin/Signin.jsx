@@ -69,11 +69,7 @@ const Signin = (props) => {
               </div>
               <div></div>
               <div className="d-grid gap-2">
-                <button
-                  className="btn btn-primary"
-                  disabled={loading}
-                  type="submit"
-                >
+                <button className="btn btn-primary" disabled={loading} type="submit">
                   {loading ? <ButtonLoader /> : 'Sign in'}
                 </button>
               </div>
