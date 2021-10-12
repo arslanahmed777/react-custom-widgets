@@ -18,13 +18,21 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     yield put(signInFailure(e.message));
   }
 }
-export function* signInWithEmail(data) {
-  console.log("signInWithEmail saga run", data);
+export function* signInWithEmail({ payload }) {
+  console.log("signInWithEmail saga run", payload);
   try {
-    const user = null;
-    yield call(callPublicApi, "signin", "post", data)
+
+    const response = yield call(callPublicApi, "signin", "post", payload)
+
+    if (response.error) {
+      yield put(signInFailure(response.error));
+    }
+    else {
+      yield put(signInSuccess(response));
+    }
+
   } catch (e) {
-    // yield put(signInFailure(e.message));
+    yield put(signInFailure(e.message));
   }
 }
 

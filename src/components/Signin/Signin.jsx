@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { callPublicApi } from "../../utils/call-api";
 import { useDispatch, useSelector } from "react-redux";
 import { emailSignInStart } from "../../redux/User/UserActions";
-import { selectUserErrors } from "../../redux/User/User.Selectors";
+import {
+  selectUserErrors,
+  selectUserLoadingState,
+} from "../../redux/User/User.Selectors";
+import ButtonLoader from "../ButtonLoader/ButtonLoader";
 
 const Signin = (props) => {
   const dispatch = useDispatch();
   const error = useSelector(selectUserErrors);
+  const loading = useSelector(selectUserLoadingState);
   const [userobj, setUserobj] = useState({ email: "", password: "" });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +20,6 @@ const Signin = (props) => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      // const data = await callPublicApi("signin", "POST", userobj);
-      // console.log(data);
       dispatch(emailSignInStart(userobj));
     } catch (err) {
       console.log("ERROR", err);
@@ -65,13 +67,18 @@ const Signin = (props) => {
                   required
                 />
               </div>
-              <h1>{error && error}</h1>
-
+              <div></div>
               <div className="d-grid gap-2">
-                <button className="btn btn-primary" type="submit">
-                  Sign in
+                <button
+                  className="btn btn-primary"
+                  disabled={loading}
+                  type="submit"
+                >
+                  {loading ? <ButtonLoader /> : "Sign in"}
                 </button>
               </div>
+
+              {error && <h4>{error}</h4>}
               <div className="mt-4">
                 <div className="d-flex justify-content-center links">
                   Don't have an account?
