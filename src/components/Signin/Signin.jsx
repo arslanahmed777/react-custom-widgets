@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { emailSignInStart } from "../../redux/User/UserActions";
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { emailSignInStart } from '../../redux/User/UserActions'
 import {
   selectUserErrors,
   selectUserLoadingState,
-} from "../../redux/User/User.Selectors";
-import ButtonLoader from "../ButtonLoader/ButtonLoader";
+} from '../../redux/User/User.Selectors'
+import ButtonLoader from '../ButtonLoader/ButtonLoader'
 
 const Signin = (props) => {
-  const dispatch = useDispatch();
-  const error = useSelector(selectUserErrors);
-  const loading = useSelector(selectUserLoadingState);
-  const [userobj, setUserobj] = useState({ email: "", password: "" });
+  const dispatch = useDispatch()
+  const error = useSelector(selectUserErrors)
+  const loading = useSelector(selectUserLoadingState)
+  const [userobj, setUserobj] = useState({ email: '', password: '' })
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserobj({ ...userobj, [name]: value });
-  };
+    const { name, value } = e.target
+    setUserobj({ ...userobj, [name]: value })
+  }
 
   const handleSignin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      dispatch(emailSignInStart(userobj));
+      dispatch(emailSignInStart(userobj))
     } catch (err) {
-      console.log("ERROR", err);
+      console.log('ERROR', err)
     }
-  };
+  }
 
   const handleChangeComponent = (component) => {
-    props.setselectedComponent(component);
-  };
+    props.setselectedComponent(component)
+  }
   return (
     <>
       <form onSubmit={(e) => handleSignin(e)}>
@@ -74,16 +74,14 @@ const Signin = (props) => {
                   disabled={loading}
                   type="submit"
                 >
-                  {loading ? <ButtonLoader /> : "Sign in"}
+                  {loading ? <ButtonLoader /> : 'Sign in'}
                 </button>
               </div>
-
-              {error && <h4>{error}</h4>}
               <div className="mt-4">
                 <div className="d-flex justify-content-center links">
                   Don't have an account?
                   <span
-                    onClick={() => handleChangeComponent("Signup")}
+                    onClick={() => handleChangeComponent('Signup')}
                     className="ms-2 fw-bold cpointer"
                   >
                     Sign Up
@@ -91,7 +89,7 @@ const Signin = (props) => {
                 </div>
                 <div className="d-flex justify-content-center links">
                   <span
-                    onClick={() => handleChangeComponent("forgotpassword")}
+                    onClick={() => handleChangeComponent('forgotpassword')}
                     className="fw-bold cpointer"
                   >
                     Forgot your password?
@@ -103,7 +101,7 @@ const Signin = (props) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default Signin;
+export default Signin
