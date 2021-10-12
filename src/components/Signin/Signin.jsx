@@ -31,7 +31,7 @@ const Signin = (props) => {
   };
   return (
     <>
-      <form onSubmit={(e) => handleSignin(e)} className="h-100">
+      <form onSubmit={(e) => handleSignin(e)}>
         <div className="row align-items-center justify-content-center h-100">
           <div className="col-md-4 col-12  ">
             <div className="text-center">

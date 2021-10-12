@@ -5,7 +5,7 @@ const ForgotPassword = (props) => {
     props.setselectedComponent("Signin");
   };
   return (
-    <form className="h-100">
+    <form>
       <div className="row align-items-center justify-content-center h-100">
         <div className="col-md-4 col-12  ">
           <div className="text-center">

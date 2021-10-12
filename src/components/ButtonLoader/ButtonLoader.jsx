@@ -1,5 +1,5 @@
-import React from "react";
-import Loadercss from "./ButtonLoader.module.css";
-const ButtonLoader = () => <span className={Loadercss.Loader} />;
+import React from 'react'
+import ButtonLoadercss from './ButtonLoader.module.css'
+const ButtonLoader = () => <span className={ButtonLoadercss.loader} />
 
-export default ButtonLoader;
+export default ButtonLoader

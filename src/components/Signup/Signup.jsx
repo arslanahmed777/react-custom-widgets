@@ -6,7 +6,7 @@ const Signup = (props) => {
   };
   return (
     <>
-      <form className="h-100">
+      <form>
         <div className="row   align-items-center justify-content-center h-100    ">
           <div className="col-md-6">
             <div className="text-center">
