@@ -7,7 +7,6 @@ const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
 const HomePage = React.lazy(() => import("./Pages/HomePage"));
 const PaginationPage = React.lazy(() => import("./Pages/PaginationPage"));
 const SigninSignupPage = React.lazy(() => import("./Pages/SigninSignupPage"));
-const ProtectedRoute = React.lazy(() => import("./components/ProtectedRoute/ProtectedRoute"));
 
 
 function App() {

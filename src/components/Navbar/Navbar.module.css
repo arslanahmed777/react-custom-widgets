@@ -1,11 +1,11 @@
-.navbar {
+.navbar_container {
   background-color: #060b26;
-  height: 60px;
 }
-.menu_bars {
-  margin-top: 15px;
-  display: inline-block;
-  margin-left: 15px;
+
+.navbar_userlogo {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
 }
 .navmenu {
   background-color: #060b26;

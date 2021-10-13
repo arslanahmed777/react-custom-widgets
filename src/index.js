@@ -5,7 +5,8 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import store from "./redux/Store";
+import { store, persistor } from "./redux/Store"
+import { PersistGate } from "redux-persist/integration/react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
@@ -15,7 +16,9 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
 
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
 
       </Router>
     </Provider>

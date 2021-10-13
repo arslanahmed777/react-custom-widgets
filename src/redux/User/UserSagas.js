@@ -19,7 +19,6 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 }
 export function* signInWithEmail({ payload }) {
-  console.log("signInWithEmail saga run", payload);
   try {
     const response = yield call(callPublicApi, "signin", "post", payload);
     if (response.error) {
@@ -27,6 +26,29 @@ export function* signInWithEmail({ payload }) {
     } else {
       yield put(signInSuccess(response));
     }
+  } catch (e) {
+    yield put(signInFailure(e.message));
+  }
+}
+
+
+
+export function* signUp({ payload }) {
+  try {
+    const response = yield call(callPublicApi, "signup", "post", payload);
+    yield put(signUpSuccess(response));
+  } catch (e) {
+    yield put(signUpFailure(e.message));
+  }
+}
+export function* signInAfterSignUp(data) {
+  yield signInWithEmail(data);
+}
+export function* checkIfUserIsAuthenticated() {
+  try {
+    const userAuth = "dsf";
+    if (!userAuth) return;
+    yield getSnapshotFromUserAuth(userAuth);
   } catch (e) {
     yield put(signInFailure(e.message));
   }
@@ -40,27 +62,6 @@ export function* signOut() {
   }
 }
 
-export function* signUp({ payload }) {
-  const response = yield call(callPublicApi, "signup", "post", payload);
-  console.log(response);
-  // try {
-  //   yield put(signUpSuccess("SD"));
-  // } catch (e) {
-  //   yield put(signUpFailure(e.message));
-  // }
-}
-export function* signInAfterSignUp({ payload: { user, additionalData } }) {
-  yield getSnapshotFromUserAuth(user, additionalData);
-}
-export function* checkIfUserIsAuthenticated() {
-  try {
-    const userAuth = "dsf";
-    if (!userAuth) return;
-    yield getSnapshotFromUserAuth(userAuth);
-  } catch (e) {
-    yield put(signInFailure(e.message));
-  }
-}
 /////////**********    WATCHET SAGAS ****************   */
 export function* onCheckUserSession() {
   yield takeLatest(
