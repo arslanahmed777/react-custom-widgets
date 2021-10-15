@@ -1,0 +1,62 @@
+.paginationsection {
+  font-size: 13px;
+}
+.tableheighcalc {
+  height: 300px;
+  overflow-y: auto;
+}
+.table-scroll {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin: auto;
+  overflow: auto;
+  min-height: 100px;
+  overflow: visible !important;
+}
+.table-scroll table {
+  width: 100%;
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-scroll th {
+  padding: 5px 7px !important;
+  color: black;
+}
+.table-scroll td {
+  padding: 5px 7px;
+}
+.table-scroll thead th {
+  background-color: #581717;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.table-scroll tr {
+  background-color: white;
+}
+.table-scroll tr:hover {
+  background-color: rgba(245, 240, 240, 0.884);
+}
+.table-scroll .table thead th {
+  font-weight: bold;
+  font-size: 12px;
+  height: 40px;
+  color: #626569;
+}
+/* .table-scroll table tbody tr:hover
+{
+  background-color: rgba(0,0,0,.075);
+} */
+/* safari and ios need the tfoot itself to be position:sticky also */
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  background-color: #c9edf2;
+  z-index: 4;
+}

@@ -15,8 +15,8 @@ export const SidebarData = [
         icon: <IoIcons.IoIosPaper />,
     },
     {
-        title: 'Products',
-        path: '/products',
+        title: 'Table',
+        path: '/table',
         icon: <FaIcons.FaCartPlus />,
     },
     {
