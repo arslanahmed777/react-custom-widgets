@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbarcss from "./Navbar.module.css";
 import { SidebarData } from "./SidebarData";
-import { FaBars, FaSignOutAlt } from "react-icons/fa";
+import { FaBars, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../redux/User/User.Selectors";
-import { useDispatch } from "react-redux";
 import { signOutStart } from "../../redux/User/UserActions";
 
 
@@ -14,7 +13,6 @@ const Navbar = () => {
   const [sidebar, setSideBar] = useState(false);
   const currentuser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-
 
   const showSidebar = () => setSideBar(!sidebar);
 
@@ -35,12 +33,19 @@ const Navbar = () => {
             {currentuser && (
               <>
                 <div className="mx-3">
-                  <img className={Navbarcss.navbar_userlogo} style={{ width: 35, height: 35, objectFit: "cover" }} alt="logo" src="http://placekitten.com/100/200" className="  rounded-circle" />
-                  <span className="ps-2">asdfsadf</span>
+                  <div className="dropdown">
+                    <div id="userdropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img className={`rounded-circle ${Navbarcss.navbar_userlogo}`} alt="logo" src="http://placekitten.com/100/200" />
+                      <span className="ps-2">{currentuser.user.name}</span>
+                    </div>
+                    <ul className="dropdown-menu" style={{ background: "#060b26", color: "white" }} aria-labelledby="userdropdown">
+                      <li> </li>
+                      <li> <Link to="/updateprofile"> Profile <FaUserCircle size={32} color={"white"} /></Link> </li>
+                      <li onClick={handleSignout} className="cpointer" > Logout <FaSignOutAlt size={32} color={"white"} /> </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="mx-3">
-                  <FaSignOutAlt onClick={handleSignout} className="cpointer" size={32} color={"white"} />
-                </div>
+
               </>
 
             )}
@@ -70,5 +75,4 @@ const Navbar = () => {
     </>
   );
 };
-
 export default Navbar;

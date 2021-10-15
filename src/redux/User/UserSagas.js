@@ -6,7 +6,6 @@ import {
   signOutFailure,
   signOutSuccess,
   signUpFailure,
-  signUpSuccess,
 } from "./UserActions";
 
 import { callPublicApi } from "../../utils/call-api";
@@ -36,7 +35,11 @@ export function* signInWithEmail({ payload }) {
 export function* signUp({ payload }) {
   try {
     const response = yield call(callPublicApi, "signup", "post", payload);
-    yield put(signUpSuccess(response));
+    if (response.error) {
+      yield put(signInFailure(response.error));
+    } else {
+      yield put(signInSuccess(response));
+    }
   } catch (e) {
     yield put(signUpFailure(e.message));
   }

@@ -7,6 +7,7 @@ const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
 const HomePage = React.lazy(() => import("./Pages/HomePage"));
 const PaginationPage = React.lazy(() => import("./Pages/PaginationPage"));
 const SigninSignupPage = React.lazy(() => import("./Pages/SigninSignupPage"));
+const UpdateProfilePage = React.lazy(() => import("./Pages/UpdateProfilePage"));
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
 
           <Route exact path="/" render={() => currentUser ? <HomePage /> : <Redirect to="/login" />} />
           <Route exact path="/pagination" render={() => currentUser ? <PaginationPage /> : <Redirect to="/login" />} />
+          <Route exact path="/updateprofile" render={() => currentUser ? <UpdateProfilePage /> : <Redirect to="/login" />} />
           {/* <ProtectedRoute exact path="/">
             <HomePage />
           </ProtectedRoute>
