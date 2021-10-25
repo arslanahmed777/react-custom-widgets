@@ -6,25 +6,25 @@ const range = (start, stop, step = 1) => {
 
 function Compare(a, b, key, method) {
   let newarr = [];
-  if (method == 'complement') {
+  if (method === 'complement') {
     newarr = a.filter(function (item) {
       for (var i = 0, len = b.length; i < len; i++) {
-        if (b[i][key] == item[key]) {
+        if (b[i][key] === item[key]) {
           return false;
         }
       }
       return true;
     });
-  } else if (method == 'intersection') {
+  } else if (method === 'intersection') {
     newarr = a.filter(function (item) {
       for (var i = 0, len = b.length; i < len; i++) {
-        if (b[i][key] == item[key]) {
+        if (b[i][key] === item[key]) {
           return true;
         }
       }
       return false;
     });
-  } else if (method == 'union') {
+  } else if (method === 'union') {
     newarr = a.concat(b);
     for (var i = 0; i < newarr.length; i++) {
       for (var j = i + 1; j < newarr.length; j++) {

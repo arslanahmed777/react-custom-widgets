@@ -35,7 +35,7 @@ const callApi = (endpoint, method, payload) => {
 const callPublicApi = (endpoint, method, payload) => {
   const configaxios = {
     method,
-    url: `http://localhost:5000/${endpoint}`,
+    url: `http://192.168.104.156:5000/${endpoint}`,
     data: payload,
     headers: {
       Accept: '*/*',

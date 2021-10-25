@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import Table from "../components/Table/Table";
 import Mock_Data from "../utils/data.json";
 import { useAsyncDebounce } from "react-table";
