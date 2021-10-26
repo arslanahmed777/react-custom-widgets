@@ -5,4 +5,6 @@ const TOKEN = () => {
     return token
 }
 
-export { TOKEN }
+const HostName = "http://192.168.104.156"
+
+export { TOKEN, HostName }

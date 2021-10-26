@@ -36,7 +36,7 @@ const Navbar = () => {
                   <div className="dropdown">
                     <div id="userdropdown" data-bs-toggle="dropdown" aria-expanded="false">
                       <img className={`rounded-circle ${Navbarcss.navbar_userlogo}`} alt="logo" src="http://placekitten.com/100/200" />
-                      <span className="ps-2">{currentuser.user.name}</span>
+                      <span className="ps-2">{currentuser.user?.name}</span>
                     </div>
                     <ul className="dropdown-menu" style={{ background: "#060b26", color: "white" }} aria-labelledby="userdropdown">
                       <li> </li>

@@ -20,9 +20,9 @@ export const SidebarData = [
         icon: <FaIcons.FaCartPlus />,
     },
     {
-        title: 'Team',
-        path: '/team',
-        icon: <IoIcons.IoMdPeople />,
+        title: 'Chat',
+        path: '/chat',
+        icon: <FaIcons.FaRocketchat />,
     },
     {
         title: 'Messages',

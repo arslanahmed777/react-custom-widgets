@@ -35,6 +35,7 @@ export function* signInWithEmail({ payload }) {
 export function* signUp({ payload }) {
   try {
     const response = yield call(callPublicApi, "signup", "post", payload);
+    console.log(response);
     if (response.error) {
       yield put(signInFailure(response.error));
     } else {
