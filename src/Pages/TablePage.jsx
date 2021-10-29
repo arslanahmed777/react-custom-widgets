@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../components/Table/Table";
 import Mock_Data from "../utils/data.json";
 import { useAsyncDebounce } from "react-table";
 import { useNamedState } from "../hooks/useNamedState"
 import { Compare } from '../utils/functions'
+import { callApi } from "../utils/call-api"
 
 export const GlobalFilter = ({ filter, setFilter }) => {
     const [value, setValue] = useState(filter);
@@ -69,9 +70,6 @@ const TablePage = () => {
         console.log("oldarr", oldarr);
 
         var updatedarray3 = Compare(oldarr, newarr, "id", "complement")
-
-
-
         console.log("updatedarray3", updatedarray3);
         if (newarr.length > 0) {
             setData(updatedarray3)
@@ -80,12 +78,15 @@ const TablePage = () => {
     }
 
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const params = { PerPage: 10, pageNo: 1 }
+            const data = await callApi("testdata", "post", params)
+            console.log(data);
+        }
 
-    // const handleRowClicked = useCallback((event) => {
-    //     console.log("row clicked", event);
-
-    // }, [data])
-
+        fetchData()
+    }, [])
     console.log("TablePage component run");
     return (
         <div className="container">
