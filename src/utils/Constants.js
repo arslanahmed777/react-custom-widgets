@@ -1,10 +1,10 @@
-import { store } from '../redux/Store'
+import { store } from "../redux/Store";
 const TOKEN = () => {
-    //  let token = Store.getState().Login && Store.getState().Login.token.token.value
-    let token = store.getState()
-    return token
-}
+  //  let token = Store.getState().Login && Store.getState().Login.token.token.value
+  let token = store.getState();
+  return token;
+};
 
-const HostName = "http://192.168.104.156"
+const HOSTNAME = "http://localhost:5000";
 
-export { TOKEN, HostName }
+export { TOKEN, HOSTNAME };
