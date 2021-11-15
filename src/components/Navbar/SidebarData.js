@@ -2,6 +2,7 @@ import React from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
+import * as RiIcons from 'react-icons/ri';
 
 export const SidebarData = [
     {
@@ -18,6 +19,23 @@ export const SidebarData = [
         title: 'Table',
         path: '/table',
         icon: <FaIcons.FaCartPlus />,
+        iconClosed: <RiIcons.RiArrowDownSFill />,
+        iconOpened: <RiIcons.RiArrowUpSFill />,
+        subNav: [
+            {
+                title: 'Add data',
+                path: '/table/addtabledata',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'sub-nav'
+            },
+            {
+                title: 'Remove data',
+                path: '/table/removetabledata',
+                icon: <IoIcons.IoIosPaper />,
+                cName: 'sub-nav'
+            },
+
+        ]
     },
     {
         title: 'Chat',
@@ -25,13 +43,13 @@ export const SidebarData = [
         icon: <FaIcons.FaRocketchat />,
     },
     {
-        title: 'Messages',
-        path: '/messages',
+        title: 'Blogs',
+        path: '/blogs',
         icon: <FaIcons.FaEnvelopeOpenText />,
     },
     {
-        title: 'Support',
-        path: '/support',
-        icon: <IoIcons.IoMdHelpCircle />,
+        title: 'Time Picker',
+        path: '/timepicker',
+        icon: <IoIcons.IoIosTime />,
     }
 ];

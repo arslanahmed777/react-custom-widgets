@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
     useTable,
     useSortBy,
@@ -6,6 +6,7 @@ import {
     useFilters,
     usePagination,
     useRowSelect,
+    useExpanded,
 } from "react-table";
 import "./Table.styles.css";
 
@@ -27,6 +28,9 @@ const IndeterminateCheckbox = React.forwardRef(
 )
 
 const Table = (props) => {
+    //Here you define state to handle pageIndex
+    const [pageChange, setpageChange] = useState(1)
+
     const columns = props.columns;
     const data = props.data;
     const GlobalFilterComponent = props.globalFilterComponent;
@@ -34,20 +38,27 @@ const Table = (props) => {
     const pagination = props.pagination;
     const rowSelection = props.rowSelection
     const handleRowClicked = props.handleRowClicked
+    const handlePageChange = props.handlePageChange
+    const handlePerRowChange = props.handlePerRowsChange
+    const totalCount = props.totalCount
+    const rowsPerPage = props.rowsPerPage
+
+    const paginationindex = [10, 20, 30, 40, 50, 100, 200, 500, 800, 1000]
 
     const defaultColumn = useMemo(() => {
         return { Filter: ColumnFilterComponent };
     }, [ColumnFilterComponent]);
 
     const tableInstance = useTable(
-        { columns, data, defaultColumn },
+        { columns, data, defaultColumn, initialState: { pageSize: rowsPerPage ? rowsPerPage : 10 } },
         useFilters,
         useGlobalFilter,
         useSortBy,
+        useExpanded,
         usePagination,
         useRowSelect,
         (hooks) => {
-            // console.log(hooks.visibleColumns);
+
             if (rowSelection) {
                 hooks.visibleColumns.push((columns) => [
                     {
@@ -79,7 +90,9 @@ const Table = (props) => {
         headerGroups,
         rows,
         page,
+        setPageSize,
         prepareRow,
+        visibleColumns,
         footerGroups,
         state,
         setGlobalFilter,
@@ -91,10 +104,19 @@ const Table = (props) => {
         selectedFlatRows
     } = tableInstance;
 
-    const { globalFilter, pageIndex } = state;
+    const { globalFilter, pageIndex, pageSize } = state;
     const haveFooterValues = footerGroups[0].headers.some(
         (fG) => typeof fG["Footer"] === "string"
     );
+    // useEffect(() => {
+    //     controlPagination()
+    // }, [props.toRestTable])
+    // to handle the pagination..
+    // const controlPagination = () => {
+    //     setpageChange(1)
+    //     setPageSize(10)
+    // }
+
 
     const tablerows = pagination ? page : rows;
 
@@ -103,12 +125,62 @@ const Table = (props) => {
         if (handleRowClicked) {
             rowSelected()
         }
+        console.log("useEffect run");
     }, [selectedFlatRows])
 
     const rowSelected = () => {
         handleRowClicked(selectedFlatRows)
     }
 
+    const Pages = (e, status) => {
+        e.preventDefault()
+        if (status === 'previous') {
+            // previousPage();
+            setpageChange(pageChange - 1)
+            if (handlePageChange) {
+                handlePageChange(pageChange - 1)
+            } else {
+                console.log('Please Contact BellMedex', '', 'info')
+            }
+        } else if (status === 'forward') {
+            // nextPage();
+
+            setpageChange(pageChange + 1)
+            if (handlePageChange) {
+                handlePageChange(pageChange + 1)
+            } else {
+                console.log('Please Contact BellMedex', '', 'info')
+            }
+        } else if (status === 'gotonext') {
+            // gotoPage(0);
+            let totalPage =
+                (totalCount / pageSize) % 1 === 0
+                    ? totalCount / pageSize
+                    : parseInt(totalCount / pageSize) + 1
+            setpageChange(totalPage)
+            if (handlePageChange) {
+                handlePageChange(totalPage)
+            } else {
+                console.log('Please Contact BellMedex', '', 'info')
+            }
+        } else if (status === 'gotopre') {
+            // gotoPage(pageCount - 1);
+            setpageChange(1)
+            if (handlePageChange) {
+                handlePageChange(1)
+            } else {
+                console.log('Please Contact BellMedex', '', 'info')
+            }
+        } else {
+            console.log('Click not found')
+        }
+    }
+    let totalPage =
+        totalCount === 0
+            ? 1
+            : (totalCount / pageSize) % 1 === 0
+                ? totalCount / pageSize
+                : parseInt(totalCount / pageSize) + 1
     console.log("Table component run");
     return (
         <>
@@ -159,13 +231,24 @@ const Table = (props) => {
                             {tablerows.map((row, i) => {
                                 prepareRow(row);
                                 return (
-                                    <tr {...row.getRowProps()}>
-                                        {row.cells.map((cell, i) => {
-                                            return (
-                                                <td {...cell.getCellProps()}> {cell.render("Cell")}</td>
-                                            );
-                                        })}
-                                    </tr>
+                                    <React.Fragment key={i}>
+                                        <tr {...row.getRowProps()}>
+                                            {row.cells.map((cell, i) => {
+                                                return (
+                                                    <td {...cell.getCellProps()}> {cell.render("Cell")}</td>
+                                                );
+                                            })}
+                                        </tr>
+                                        {row.isExpanded ? (
+                                            <>
+                                                <tr>
+                                                    <td colSpan={visibleColumns.length}>
+                                                        {props.subTableComp(row)}
+                                                    </td>
+                                                </tr>
+                                            </>
+                                        ) : null}
+                                    </React.Fragment>
                                 );
                             })}
                         </tbody>
@@ -187,26 +270,35 @@ const Table = (props) => {
             </div>
             {pagination && (
                 <div>
-                    <span>
-                        Page{" "}
-                        <strong>
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{" "}
+                    {/* <span>
+                        Page{" "}<strong>{pageIndex + 1} of {pageOptions.length}</strong>{" "}
+                    </span> */}
+                    <span className="p-2">
+                        Showing {pageChange} to {totalPage} of Pages
                     </span>
-                    <button
-                        onClick={() => previousPage()}
-                        disabled={!canPreviousPage}
-                        className="btn btn-success"
-                    >
+                    <button onClick={(e) => Pages(e, 'previous')} disabled={pageChange === 1 ? true : false} className="btn btn-success">
                         Previous
                     </button>
-                    <button
-                        onClick={() => nextPage()}
-                        disabled={!canNextPage}
-                        className="btn btn-danger"
-                    >
+                    <button onClick={(e) => Pages(e, 'forward')} disabled={totalCount == 0 ? true : pageChange == totalPage ? true : false} className="btn btn-danger" >
                         Next
                     </button>
+                    <div>
+                        <select value={pageSize} onChange={(e) => {
+                            setPageSize(Number(e.target.value))
+                            if (handlePerRowChange) {
+                                handlePerRowChange(Number(e.target.value), 1)
+                            } else {
+                                console.log('Please Contact BellMedex', '', 'info')
+                            }
+
+                        }}>
+                            {paginationindex.map((pageSize) => (
+                                <option key={pageSize} value={pageSize}>
+                                    {pageSize}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             )}
         </>
@@ -221,7 +313,7 @@ function chkStateProps(prevProps, nextProps) {
         prevProps.pagination === nextProps.pagination &&
         prevProps.rowSelection === nextProps.rowSelection
     ) {
-        return false
+        return true
     } else {
         return false
     }

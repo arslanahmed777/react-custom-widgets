@@ -45,7 +45,7 @@ const Chat = () => {
                                 <li key={i} style={{ width: '100%' }}>
                                     <div className="msj macro">
                                         <div className="avatar">
-                                            <img className="img-circle" style={{ width: '100%' }} src="https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48" />
+                                            <img alt="avatar" className="img-circle" style={{ width: '100%' }} src="https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48" />
                                         </div>
                                         <div className="text text-l">
                                             <p>{chat}</p>

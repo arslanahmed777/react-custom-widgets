@@ -39,8 +39,9 @@ function Compare(a, b, key, method) {
 }
 
 
-const getTodayDate = () => {
-  var today = new Date()
+const getTodayDate = (date) => {
+
+  var today = new Date(date)
   var dd = today.getDate()
   var mm = today.getMonth() + 1 //January is 0!
   var yyyy = today.getFullYear()
@@ -53,4 +54,35 @@ const getTodayDate = () => {
   today = yyyy + '-' + mm + '-' + dd
   return today
 }
-export { range, Compare, getTodayDate };
+
+const FormatDate = (date, formatTo) => {
+  let seperator = "";
+  let a = new Date(date);
+
+  const month =
+    (a.getMonth() + 1).toString().length === 1
+      ? "0" + (a.getMonth() + 1).toString()
+      : a.getMonth() + 1;
+
+  const day =
+    a.getDate().toString().length === 1
+      ? "0" + a.getDate().toString()
+      : a.getDate();
+
+  let b = {
+    dd: day,
+    mm: month,
+    yyyy: a.getFullYear(),
+  };
+
+  if (formatTo.includes("/")) seperator = "/";
+  else if (formatTo.includes("-")) seperator = "-";
+
+  let elements = formatTo.split(seperator);
+
+  const newDate =
+    b[elements[0]] + seperator + b[elements[1]] + seperator + b[elements[2]];
+
+  return newDate;
+};
+export { range, Compare, getTodayDate, FormatDate };

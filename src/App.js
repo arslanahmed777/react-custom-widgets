@@ -10,6 +10,8 @@ const SigninSignupPage = React.lazy(() => import("./Pages/SigninSignupPage"));
 const UpdateProfilePage = React.lazy(() => import("./Pages/UpdateProfilePage"));
 const TablePage = React.lazy(() => import("./Pages/TablePage"));
 const ChatPage = React.lazy(() => import("./Pages/ChatPage"))
+const BlogsPage = React.lazy(() => import("./Pages/BlogsPage"))
+const TimePickerPage = React.lazy(() => import("./Pages/TimePickerPage"))
 
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
           <Route exact path="/updateprofile" render={() => currentUser ? <UpdateProfilePage /> : <Redirect to="/login" />} />
           <Route exact path="/table" render={() => currentUser ? <TablePage /> : <Redirect to="/login" />} />
           <Route exact path="/chat" render={() => currentUser ? <ChatPage /> : <Redirect to="/login" />} />
+          <Route exact path="/blogs" render={() => currentUser ? <BlogsPage /> : <Redirect to="/login" />} />
+          <Route exact path="/timepicker" render={() => currentUser ? <TimePickerPage /> : <Redirect to="/login" />} />
+
           {/* <ProtectedRoute exact path="/">
             <HomePage />
           </ProtectedRoute>
