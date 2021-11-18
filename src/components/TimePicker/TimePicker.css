@@ -17,10 +17,11 @@
   color: #4f4f4f;
   appearance: none;
   border-radius: 0.25rem;
+  transition: color 1s;
 }
 
 .timepicker-toggle-button:hover {
-  color: #ff0808;
+  color: #2979ff;
 }
 .timepicker-toggle-button {
   position: absolute;
@@ -34,27 +35,24 @@
   cursor: pointer;
 }
 .timepicker-wrapper {
-  padding: 10px 20px;
+  padding: 3px 20px;
   position: absolute;
   touch-action: none;
   z-index: 1065;
-  opacity: 1;
   width: 100%;
   border-radius: 6px;
   background-color: #2979ff;
   color: white;
-  height: 120px;
-  display: flex;
+  height: 60px;
   justify-content: center;
   align-items: center;
   margin-top: 3px;
 }
+
 .timepicker-current {
   font-weight: 300;
   line-height: 1.2;
-  letter-spacing: -0.00833em;
   color: #fff;
-  font-size: 33px;
   border: none;
   background: transparent;
   padding: 0;
@@ -67,14 +65,16 @@
   left: 0;
   width: 100%;
   text-align: center;
-  font-size: 26px;
+  font-size: 1.2rem;
   line-height: 8px;
+  display: flex;
+  justify-content: center;
 }
 .timepicker_wrapper_icon_up {
-  top: -27px;
+  top: -7px;
 }
 .timepicker_wrapper_icon_down {
-  bottom: -27px;
+  bottom: -7px;
 }
 
 .timepicker_icon {
@@ -88,19 +88,27 @@
 
 .timepicker-dots {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.3;
   letter-spacing: -0.00833em;
 }
 .ok_btn {
   font-weight: 500;
   color: #fff;
-  font-size: 15px;
   border: none;
+  border-radius: 50%;
   background: transparent;
-  padding: 7px;
+  padding: 6px;
 }
 .ok_btn:hover {
   background-color: rgba(0, 0, 0, 0.08);
+}
+.errordiv {
+  position: absolute;
+  color: #f93154;
+  font-size: 0.875rem;
+  z-index: 1064;
+  background: white;
+  width: 100%;
 }
