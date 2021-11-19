@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TimePicker from "../components/TimePicker/TimePicker"
 
 const TimePickerPage = () => {
-    const [time, setTime] = useState("23:22")
+    const [time, setTime] = useState("10:00 AM")
     const changeTime = (time) => {
         console.log("i run", time);
         setTime(time)
@@ -16,7 +16,7 @@ const TimePickerPage = () => {
                     <button className="btn btn-primary btn-block btn-lg">{time}</button>
                 </div>
                 <div className="col-md-5 border p-5">
-                    <TimePicker size="XS" time={time} changeTime={changeTime} timeFormat={24} />
+                    <TimePicker size="XS" time={time} changeTime={changeTime} timeFormat={12} />
                 </div>
 
             </div>
