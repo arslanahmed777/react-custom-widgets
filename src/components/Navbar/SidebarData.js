@@ -51,5 +51,10 @@ export const SidebarData = [
         title: 'Time Picker',
         path: '/timepicker',
         icon: <IoIcons.IoIosTime />,
+    },
+    {
+        title: 'Tree View',
+        path: '/treeview',
+        icon: <IoIcons.IoIosGitMerge />,
     }
 ];

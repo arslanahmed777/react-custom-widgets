@@ -12,6 +12,7 @@ const TablePage = React.lazy(() => import("./Pages/TablePage"));
 const ChatPage = React.lazy(() => import("./Pages/ChatPage"))
 const BlogsPage = React.lazy(() => import("./Pages/BlogsPage"))
 const TimePickerPage = React.lazy(() => import("./Pages/TimePickerPage"))
+const TreeViewPage = React.lazy(() => import("./Pages/TreeViewPage"))
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route exact path="/chat" render={() => currentUser ? <ChatPage /> : <Redirect to="/login" />} />
           <Route exact path="/blogs" render={() => currentUser ? <BlogsPage /> : <Redirect to="/login" />} />
           <Route exact path="/timepicker" render={() => currentUser ? <TimePickerPage /> : <Redirect to="/login" />} />
+          <Route exact path="/treeview" render={() => currentUser ? <TreeViewPage /> : <Redirect to="/login" />} />
 
           {/* <ProtectedRoute exact path="/">
             <HomePage />
