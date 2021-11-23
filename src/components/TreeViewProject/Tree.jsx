@@ -35,12 +35,15 @@ const TreeNode = ({ node }) => {
                     {/* {node.icon} */}
                     {node.label}
                 </div>
+
             </div>
+
 
             {hasChild && childVisible && (
                 <div className="d-tree-content">
                     <ul className="d-flex d-tree-container flex-column">
                         <Tree data={node.children} />
+
                     </ul>
                 </div>
             )}

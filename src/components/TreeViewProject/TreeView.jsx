@@ -25,19 +25,22 @@ const treeData = [
                         label: "Document-0-2.doc",
                         icon: "fa fa-file",
                         title: "Documents Folder",
+                        children: [
+                            {
+                                key: "0-1-1",
+                                label: "Document-0-1.doc",
+                                icon: "fa fa-file",
+                                title: "Documents Folder",
+                            },
+                            {
+                                key: "0-1-1",
+                                label: "Document-0-1.doc",
+                                icon: "fa fa-file",
+                                title: "Documents Folder",
+                            },
+                        ]
                     },
-                    {
-                        key: "0-1-3",
-                        label: "Document-0-3.doc",
-                        icon: "fa fa-file",
-                        title: "Documents Folder",
-                    },
-                    {
-                        key: "0-1-4",
-                        label: "Document-0-4.doc",
-                        icon: "fa fa-file",
-                        title: "Documents Folder",
-                    },
+
                 ],
             },
         ],
@@ -67,7 +70,6 @@ const treeData = [
         label: "Downloads",
         icon: <FaFolder />,
         title: "Downloads Folder",
-        children: [],
     },
 ];
 const TreeView = () => {
