@@ -1,83 +1,49 @@
 import React from 'react'
+import { useNamedState } from "../../hooks/useNamedState"
+import nodes from "./nodes"
 import Tree from "./Tree"
-import { FaFolder } from "react-icons/fa";
-const treeData = [
-    {
-        key: "0",
-        label: "Documents",
-        icon: <FaFolder />,
-        title: "Documents Folder",
-        children: [
-            {
-                key: "0-0",
-                label: "Document 1-1",
-                icon: "fa fa-folder",
-                title: "Documents Folder",
-                children: [
-                    {
-                        key: "0-1-1",
-                        label: "Document-0-1.doc",
-                        icon: "fa fa-file",
-                        title: "Documents Folder",
-                    },
-                    {
-                        key: "0-1-2",
-                        label: "Document-0-2.doc",
-                        icon: "fa fa-file",
-                        title: "Documents Folder",
-                        children: [
-                            {
-                                key: "0-1-1",
-                                label: "Document-0-1.doc",
-                                icon: "fa fa-file",
-                                title: "Documents Folder",
-                            },
-                            {
-                                key: "0-1-1",
-                                label: "Document-0-1.doc",
-                                icon: "fa fa-file",
-                                title: "Documents Folder",
-                            },
-                        ]
-                    },
-
-                ],
-            },
-        ],
-    },
-    {
-        key: "1",
-        label: "Desktop",
-        icon: <FaFolder />,
-        title: "Desktop Folder",
-        children: [
-            {
-                key: "1-0",
-                label: "document1.doc",
-                icon: "fa fa-file",
-                title: "Documents Folder",
-            },
-            {
-                key: "0-0",
-                label: "documennt-2.doc",
-                icon: "fa fa-file",
-                title: "Documents Folder",
-            },
-        ],
-    },
-    {
-        key: "2",
-        label: "Downloads",
-        icon: <FaFolder />,
-        title: "Downloads Folder",
-    },
-];
+import { FaChevronRight, FaChevronDown } from "react-icons/fa";
 const TreeView = () => {
+    const [userRights, setUserRights] = useNamedState("userRights", nodes)
+    const [filterRights, setFilterRights] = useNamedState("filterRights", nodes)
+    const [expanded, setExpanded] = useNamedState("expanded", [])
+    const handleExpand = (newArray) => {
+        console.log("handleExpand", newArray);
+        setExpanded([...newArray])
+    }
+    const handleCheck = (treeNodes) => {
+        console.log("handleCheck", treeNodes);
+        //setFilterRights([...treeNodes])
+    }
+    const handleRightChange = (filternodes) => {
+        console.log("handleRightChange", filternodes);
+        setFilterRights([...filternodes])
+    }
+    const checkedNodesList = (chklist) => {
+        console.log("checkedNodesList", chklist);
+    }
+    const handeleSave = (chklist) => {
+        console.log("handeleSave", chklist);
+    }
     return (
         <div>
             <div className="row mt-3 d-flex justify-content-center">
                 <div className="col-lg-8 text-left text-white bg-dark ">
-                    <Tree data={treeData} />
+                    <Tree
+                        nodes={userRights} // filter the value from array
+                        filternodes={filterRights}
+                        expanded={expanded}
+                        handleExpand={handleExpand}
+                        changeState={handleCheck}
+                        handleChange={handleRightChange}
+                        checknodes={checkedNodesList}
+                        saveUserRights={handeleSave}
+                        addEditRights={true}
+                        column={2}
+                        openIcon={<FaChevronRight />}
+                        closeIcon={<FaChevronDown />}
+
+                    />
                 </div>
             </div>
         </div>
