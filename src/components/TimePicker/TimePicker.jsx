@@ -258,7 +258,7 @@ const TimePicker = (props) => {
                     <div className="row h-100 w-100  g-0 justify-content-center align-items-center">
                         <div className="col-6">
                             <div className="row g-0">
-                                <div className="col-5  d-flex justify-content-center align-items-center position-relative  ">
+                                <div className="col-5 d-flex justify-content-center align-items-center position-relative  ">
                                     <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }}>
                                         <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={() => changeHours("ADD")} />
                                     </div>
