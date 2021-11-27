@@ -13,7 +13,7 @@ const TreeView = () => {
     }
     const handleCheck = (treeNodes) => {
         console.log("handleCheck", treeNodes);
-        //setFilterRights([...treeNodes])
+        setFilterRights([...treeNodes])
     }
     const handleRightChange = (filternodes) => {
         console.log("handleRightChange", filternodes);
@@ -26,9 +26,9 @@ const TreeView = () => {
         console.log("handeleSave", chklist);
     }
     return (
-        <div>
+        <div className="container">
             <div className="row mt-3 d-flex justify-content-center">
-                <div className="col-lg-8 text-left text-white bg-dark ">
+                <div className="col-lg-12 text-left text-white bg-dark ">
                     <Tree
                         nodes={userRights} // filter the value from array
                         filternodes={filterRights}
