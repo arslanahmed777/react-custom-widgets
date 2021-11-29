@@ -15,7 +15,78 @@ function recursivenode(nodes) {
     }
     return nodes
 }
+const findNode = (nodes, v, status) => {
+    let nonMatch = [];
+    let foundMatch = [];
+    let updatedData = [];
+    let parentNodes = (nodes) => {
+        nodes.forEach((node) => {
+            if (node.value !== v) {
+                nonMatch.push(node);
 
+                if (node.nodes) parentNodes(node.nodes);
+            } else {
+                foundMatch.push(node);
+            }
+        });
+    };
+    let setStatus = (status, parents, nextNodes) => {
+        let totalParents = parents.length;
+        if (totalParents > 1) {
+            nextNodes.forEach((_) => {
+                if (parents.some((v) => v == _.value)) {
+                    _.status = status;
+                    updatedData.push(_);
+                    if (_.nodes) setStatus(status, parents, _.nodes);
+                } else {
+                    if (_.nodes) setStatus(status, parents, _.nodes);
+                }
+            });
+        }
+    };
+    const findParentAndChild = (value) => {
+        let parents = [value];
+        const findNestedParent = (NextNodes, value) => {
+            NextNodes.forEach((_) => {
+                if (_.nodes && _.nodes.some((node) => node.value == value)) {
+                    parents.push(_.value);
+                    findNestedParent(nodes, _.value);
+                } else {
+                    if (_.nodes) findNestedParent(_.nodes, value);
+                }
+            });
+            return parents;
+        };
+        const findNestedChild = (NextNodes, value) => {
+            let nodes = [];
+            let childNames = [];
+            let findChildNodes = (next, v) => {
+                next.forEach((node) => {
+                    if (node.value == v && node.nodes) {
+                        nodes = node.nodes;
+                    } else {
+                        if (node.nodes) findChildNodes(node.nodes, v);
+                    }
+                });
+            };
+            const getchildNames = (nextNodes) => {
+                nextNodes.forEach((_) => {
+                    childNames.push(_.value);
+                    if (_.nodes) getchildNames(_.nodes);
+                });
+            };
+            findChildNodes(NextNodes, value);
+            getchildNames(nodes);
+            return childNames;
+        };
+        setStatus(status, [...findNestedParent(nodes, value), ...findNestedChild(nodes, value)], nodes);
+    };
+
+    parentNodes(nodes);
+    findParentAndChild(foundMatch[0]?.value);
+
+    return Array.from(new Set([...nodes, updatedData[0]]));
+};
 
 
 
@@ -76,7 +147,7 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
 
 
-        recursivenode(nodes)
+        // recursivenode(nodes)
 
 
         let findDeep = function (data, activity) {
@@ -108,8 +179,9 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             return newdata
         }
 
-        console.log(findDeep(filternodes, e.target.value))
-        changeState(findDeep(filternodes, e.target.value))
+        //console.log(findDeep(filternodes, e.target.value))
+        // changeState(findDeep(filternodes, e.target.value))
+        changeState(findNode(filternodes, e.target.value, e.target.checked))
 
     }
 
