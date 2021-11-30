@@ -20,6 +20,7 @@ export class CheckboxTree extends React.Component {
   // for checks
   handleCheck = (e) => {
     if (e.target.value === 'Parent') {
+      console.log("parent checked");
       let treeNodes = this.props.filternodes
       treeNodes &&
         treeNodes.forEach((treeNode) => {
@@ -38,6 +39,7 @@ export class CheckboxTree extends React.Component {
 
       this.props.changeState(treeNodes)
     } else if (e.target.value === 'Children') {
+      console.log("Children checked");
       let treeNodes = this.props.filternodes
       treeNodes &&
         treeNodes.forEach((treeNode) => {
@@ -66,7 +68,9 @@ export class CheckboxTree extends React.Component {
         })
       this.props.changeState(treeNodes)
     } else if (e.target.value === 'subChildren') {
+      console.log("subChildren checked");
       let treeNodes = this.props.filternodes
+      console.log("treeNodes", treeNodes);
       treeNodes &&
         treeNodes.forEach((treeNode) => {
           treeNode.nodes &&
@@ -76,39 +80,16 @@ export class CheckboxTree extends React.Component {
                   if (childrenofchildren.value === e.target.name) {
                     childrenofchildren.status = e.target.checked
                   }
-
                   if (childrenofchildren.status) {
-                    //    counter1 += 1;
-                    // } else {
-                    // }
-
-                    // if (counter1 === treeNodeChildren.nodes.length){
                     treeNodeChildren.status = true
-                    // for (
-                    //   let index = 0;
-                    //   index < treeNode.nodes.length;
-                    //   index++
-                    // ) {
-                    //   if (treeNode.nodes[index].status) {
-                    //     counter += 1;
-                    //   } else {
-                    //   }
-                    // }
-                    // if (
-                    //   counter + counter1 >=
-                    //   treeNode.nodes.length + treeNodeChildren.nodes.length
-                    // ) {
                     treeNode.status = true
-                    // }
+
                   }
-                  //else {
-                  //   treeNodeChildren.status = false;
-                  //   treeNode.status = false;
-                  // }
+
                 })
             })
         })
-      this.props.changeState(treeNodes)
+      //this.props.changeState(treeNodes)
     }
   }
 

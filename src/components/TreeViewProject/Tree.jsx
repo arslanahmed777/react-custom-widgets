@@ -135,29 +135,27 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
         //console.log(findDeep(filternodes, e.target.value))
         // changeState(findDeep(filternodes, e.target.value))
-        let fff = filternodes
-        console.log("filternodes", fff);
-
 
         function filtnodes(filternodes, checked, value) {
             const ddd = filternodes.map((fnodes) => {
                 let fsnodes = JSON.stringify(fnodes)
                 if (fsnodes.includes(value)) {
                     let parentnode = JSON.parse(fsnodes)
-                    parentnode.status = checked
+                    parentnode.status = true
                     if (parentnode.nodes && parentnode.nodes.length > 0) {
-                        parentnode.nodes = parentnode.nodes.map((child, i) => {
-                            let fcnodes = JSON.stringify(child)
-                            if (fcnodes.includes(fcnodes)) {
-                                let childnode = JSON.parse(fcnodes)
-                                childnode.status = checked
+                        // parentnode.nodes = parentnode.nodes.map((child, i) => {
+                        //     let fcnodes = JSON.stringify(child)
+                        //     if (fcnodes.includes(fcnodes)) {
+                        //         let childnode = JSON.parse(fcnodes)
+                        //         childnode.status = checked
 
-                            } else {
-                                fcnodes = JSON.parse(fcnodes)
-                                return fcnodes
-                            }
+                        //     } else {
+                        //         fcnodes = JSON.parse(fcnodes)
+                        //         return fcnodes
+                        //     }
 
-                        })
+                        // })
+                        console.log("checked", checked);
                     }
                     return parentnode
                 }
@@ -168,10 +166,11 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             })
             return ddd
         }
-        console.log("findparentnode", filtnodes(filternodes));
+        console.log("nodes", nodes);
+        console.log("findparentnode", filtnodes(filternodes, !nodes.status, e.target.value));
 
         // findNode(filternodes, e.target.value, e.target.checked)
-        changeState(filtnodes(filternodes, e.target.checked, e.target.value))
+        // changeState(filtnodes(filternodes, e.target.checked, e.target.value))
 
     }
 

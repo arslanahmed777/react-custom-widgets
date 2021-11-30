@@ -12,7 +12,7 @@ const CheckboxTreeView = () => {
         setExpanded([...newArray])
     }
     const handleCheck = (treeNodes) => {
-        console.log("handleCheck", treeNodes);
+        //console.log("handleCheck", treeNodes);
         setFilterRights([...treeNodes])
     }
     const handleRightChange = (filternodes) => {
