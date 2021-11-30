@@ -30,62 +30,19 @@ const findNode = (nodes, v, status) => {
             }
         });
     };
-    let setStatus = (status, parents, nextNodes) => {
-        let totalParents = parents.length;
-        if (totalParents > 1) {
-            nextNodes.forEach((_) => {
-                if (parents.some((v) => v == _.value)) {
-                    _.status = status;
-                    updatedData.push(_);
-                    if (_.nodes) setStatus(status, parents, _.nodes);
-                } else {
-                    if (_.nodes) setStatus(status, parents, _.nodes);
-                }
-            });
-        }
-    };
-    const findParentAndChild = (value) => {
-        let parents = [value];
-        const findNestedParent = (NextNodes, value) => {
-            NextNodes.forEach((_) => {
-                if (_.nodes && _.nodes.some((node) => node.value == value)) {
-                    parents.push(_.value);
-                    findNestedParent(nodes, _.value);
-                } else {
-                    if (_.nodes) findNestedParent(_.nodes, value);
-                }
-            });
-            return parents;
-        };
-        const findNestedChild = (NextNodes, value) => {
-            let nodes = [];
-            let childNames = [];
-            let findChildNodes = (next, v) => {
-                next.forEach((node) => {
-                    if (node.value == v && node.nodes) {
-                        nodes = node.nodes;
-                    } else {
-                        if (node.nodes) findChildNodes(node.nodes, v);
-                    }
-                });
-            };
-            const getchildNames = (nextNodes) => {
-                nextNodes.forEach((_) => {
-                    childNames.push(_.value);
-                    if (_.nodes) getchildNames(_.nodes);
-                });
-            };
-            findChildNodes(NextNodes, value);
-            getchildNames(nodes);
-            return childNames;
-        };
-        setStatus(status, [...findNestedParent(nodes, value), ...findNestedChild(nodes, value)], nodes);
-    };
+
+
+
+
+
 
     parentNodes(nodes);
-    findParentAndChild(foundMatch[0]?.value);
 
-    return Array.from(new Set([...nodes, updatedData[0]]));
+    console.log("nonMatch", nonMatch);
+    console.log("foundMatch", foundMatch);
+    //findParentAndChild(foundMatch[0]?.value);
+
+    // return Array.from(new Set([...nodes, updatedData[0]]));
 };
 
 
@@ -96,7 +53,6 @@ const findNode = (nodes, v, status) => {
 
 const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleExpand, changeState }) => {
     column = 12 / column
-    console.log("Tree render");
     return (
         <div className="row">
             {filternodes.map((items, i) => {
@@ -113,7 +69,6 @@ const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleE
 
 
 const Tree1 = (props) => {
-    console.log("Tree1 render");
     return (
         <div className="d-tree">
             <ul className="d-flex d-tree-container flex-column">
@@ -132,7 +87,6 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
     const hasChild = nodes.nodes ? true : false;
 
     const handleVisibility = (e) => {
-        console.log("e", e);
         let newArray = expanded
         if (expanded.includes(e)) {
             newArray = expanded.filter((value) => { return value !== e })
@@ -181,7 +135,43 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
         //console.log(findDeep(filternodes, e.target.value))
         // changeState(findDeep(filternodes, e.target.value))
-        changeState(findNode(filternodes, e.target.value, e.target.checked))
+        let fff = filternodes
+        console.log("filternodes", fff);
+
+
+        function filtnodes(filternodes, checked, value) {
+            const ddd = filternodes.map((fnodes) => {
+                let fsnodes = JSON.stringify(fnodes)
+                if (fsnodes.includes(value)) {
+                    let parentnode = JSON.parse(fsnodes)
+                    parentnode.status = checked
+                    if (parentnode.nodes && parentnode.nodes.length > 0) {
+                        parentnode.nodes = parentnode.nodes.map((child, i) => {
+                            let fcnodes = JSON.stringify(child)
+                            if (fcnodes.includes(fcnodes)) {
+                                let childnode = JSON.parse(fcnodes)
+                                childnode.status = checked
+
+                            } else {
+                                fcnodes = JSON.parse(fcnodes)
+                                return fcnodes
+                            }
+
+                        })
+                    }
+                    return parentnode
+                }
+                else {
+                    fsnodes = JSON.parse(fsnodes)
+                    return fsnodes
+                }
+            })
+            return ddd
+        }
+        console.log("findparentnode", filtnodes(filternodes));
+
+        // findNode(filternodes, e.target.value, e.target.checked)
+        changeState(filtnodes(filternodes, e.target.checked, e.target.value))
 
     }
 
@@ -190,7 +180,6 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
 
 
-    console.log("TreeNode render");
     return (
         <li className="d-tree-node border-0">
             <div className="d-flex" >

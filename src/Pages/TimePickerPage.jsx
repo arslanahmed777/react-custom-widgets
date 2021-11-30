@@ -16,7 +16,7 @@ const TimePickerPage = () => {
                     <button className="btn btn-primary btn-block btn-lg">{time}</button>
                 </div>
                 <div className="col-md-5 border p-5">
-                    <TimePicker size="XS" time={time} changeTime={changeTime} timeFormat={12} />
+                    <TimePicker size="S" time={time} changeTime={changeTime} timeFormat={12} />
                 </div>
 
             </div>

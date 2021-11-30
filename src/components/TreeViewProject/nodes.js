@@ -91,8 +91,8 @@ const nodes = [
                               nodes: null
                            },
                            {
-                              "value": "turtle",
-                              "text": "turtle",
+                              "value": "lizard",
+                              "text": "lizard",
                               "status": false,
                               nodes: null
                            },

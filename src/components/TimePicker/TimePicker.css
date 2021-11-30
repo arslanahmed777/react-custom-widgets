@@ -1,3 +1,87 @@
+/* bootstrap css */
+.tp_row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tp_col-2 {
+  flex: 0 0 auto;
+  width: 16.66666667%;
+}
+.tp_col-3 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+.tp_col-5 {
+  flex: 0 0 auto;
+  width: 41.66666667%;
+}
+.tp_col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+.tp_position-relative {
+  position: relative !important;
+}
+.tp_d-flex {
+  display: flex !important;
+}
+
+.tp_h-100 {
+  height: 100% !important;
+}
+.tp_w-100 {
+  width: 100% !important;
+}
+.tp_text-center {
+  text-align: center;
+}
+.tp_align-items-center {
+  align-items: center !important;
+}
+.tp_justify-content-center {
+  justify-content: center !important;
+}
+.tp_justify-content-end {
+  justify-content: flex-end !important;
+}
+.tp_justify-content-evenly {
+  justify-content: space-evenly !important;
+}
+/* bootstrap css ENDDDDDDDDDDDDDDDDDDDDD */
+
+/*  HOUR AND MINUTES INPUT CSS */
+
+.hours_minute_input {
+  width: 40%;
+  height: 100%;
+  min-height: 20px;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  color: black;
+  text-align: center;
+  border-radius: 4px;
+  background: white;
+  font-weight: 300;
+  line-height: 1.2;
+  transition: all 0.5s;
+  vertical-align: middle;
+}
+.hours_minute_input:read-only {
+  cursor: pointer;
+  background: transparent;
+  color: white;
+}
+.hours_minute_input:hover {
+  background: white;
+  color: black;
+}
+.hours_minute_input:focus-visible {
+  outline: none;
+}
+
+/* HOUR AND MINUTES INPUT ******** END ****** */
+
 .form-outline {
   position: relative;
   border: 1px solid #bdbdbd;
@@ -10,14 +94,13 @@
   background: transparent;
   transition: all 0.2s linear;
   display: block;
-  width: 100%;
-  font-size: 1rem;
+  width: -webkit-fill-available;
+  font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.6;
   color: #4f4f4f;
   appearance: none;
   border-radius: 0.25rem;
-  transition: color 1s;
 }
 
 .timepicker-toggle-button:hover {
@@ -35,7 +118,7 @@
   cursor: pointer;
 }
 .timepicker-wrapper {
-  padding: 3px 20px;
+  padding: 3px 2px;
   position: absolute;
   touch-action: none;
   z-index: 1065;
@@ -46,6 +129,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 3px;
+  box-sizing: border-box;
 }
 
 .timepicker-current {
@@ -96,6 +180,7 @@
   color: #fff;
   border: none;
   border-radius: 50%;
+  cursor: pointer;
   background: transparent;
 }
 .ok_btn:hover {
