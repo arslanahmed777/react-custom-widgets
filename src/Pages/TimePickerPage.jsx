@@ -15,7 +15,7 @@ const TimePickerPage = () => {
                     <button className="btn btn-success" onClick={() => setTime("12:26")}>change to 12:26"</button>
                     <button className="btn btn-primary btn-block btn-lg">{time}</button>
                 </div>
-                <div className="col-md-5 border p-5">
+                <div className="col-md-2 border ">
                     <TimePicker size="S" time={time} changeTime={changeTime} timeFormat={12} />
                 </div>
 

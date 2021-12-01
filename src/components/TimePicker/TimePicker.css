@@ -64,8 +64,7 @@
   background: white;
   font-weight: 300;
   line-height: 1.2;
-  transition: all 0.5s;
-  vertical-align: middle;
+  transition: all 0.5s; 
 }
 .hours_minute_input:read-only {
   cursor: pointer;

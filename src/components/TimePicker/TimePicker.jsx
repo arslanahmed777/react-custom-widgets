@@ -423,48 +423,47 @@ const TimePicker = (props) => {
                     <div className="tp_row tp_h-100 tp_w-100  g-0 tp_justify-content-center tp_align-items-center">
                         <div className="tp_col-6">
                             <div className="tp_row g-0">
-                                <div className="tp_col-5 tp_d-flex tp_justify-content-center tp_align-items-center tp_position-relative  ">
-                                    {allowHourInput === false && (
-                                        <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }}>
-                                            <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={() => changeHours('ADD')} />
-                                        </div>
-                                    )}
-                                    <div className="tp_text-center">
-                                        {/* <button className="timepicker-current" style={{ fontSize: styling.timepickerCurrent_fontSize }}>
-                                            {hours}
-                                        </button> */}
+                                <div className="tp_col-5 tp_d-flex tp_justify-content-center tp_align-items-center ">
+
+                                    <div className="tp_text-center tp_position-relative">
+                                        {allowHourInput === false && (
+                                            <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }}>
+                                                <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={() => changeHours('ADD')} />
+                                            </div>
+                                        )}
+
                                         <input onBlur={handleHorInputBlur} onKeyPress={(e) => ValidateInput(e, 'Numeric')} onChange={handleHorInputChange} onDoubleClick={handleHorDbblClk} readOnly={!allowHourInput} value={hrMinInputValue.hour} className="hours_minute_input" style={{ fontSize: styling.timepickerCurrent_fontSize }} type="text" />
+
+                                        {allowHourInput === false && (
+                                            <div className="timepicker_wrapper_icon" style={{ bottom: styling.icondown_bottom }} >
+                                                <img src={Arrow_down} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_down" onClick={() => changeHours('MINUS')} />
+                                            </div>
+                                        )}
                                     </div>
 
-                                    {allowHourInput === false && (
-                                        <div className="timepicker_wrapper_icon" style={{ bottom: styling.icondown_bottom }} >
-                                            <img src={Arrow_down} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_down" onClick={() => changeHours('MINUS')} />
-                                        </div>
-                                    )}
+
                                 </div>
                                 <div className="tp_col-2 tp_d-flex  tp_justify-content-center tp_align-items-center">
-                                    <p className="timepicker-dots" style={{ fontSize: styling.timepickerdots_fontSize }}>
+                                    {/* <p className="timepicker-dots" style={{ fontSize: styling.timepickerdots_fontSize }}>
                                         :
-                                    </p>
+                                    </p> */}
                                 </div>
-                                <div className="tp_col-5 tp_d-flex tp_justify-content-center tp_align-items-center tp_position-relative  ">
-                                    {allowMinuteInput === false && (
-                                        <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }} >
-                                            <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={() => changeMinutes('ADD')} />
-                                        </div>
-                                    )}
+                                <div className="tp_col-5 tp_d-flex tp_justify-content-center tp_align-items-center   ">
+                                    <div className="tp_text-center tp_position-relative">
+                                        {allowMinuteInput === false && (
+                                            <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }} >
+                                                <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={() => changeMinutes('ADD')} />
+                                            </div>
+                                        )}
 
-                                    <div className="tp_text-center">
-                                        {/* <button className="timepicker-current" style={{ fontSize: styling.timepickerCurrent_fontSize }} >
-                                            {minutes}
-                                        </button> */}
                                         <input onBlur={handleMinInputBlur} onKeyPress={(e) => ValidateInput(e, 'Numeric')} onChange={handleMinInputChange} onDoubleClick={handleMinDbblClk} readOnly={!allowMinuteInput} value={hrMinInputValue.minute} className="hours_minute_input" style={{ fontSize: styling.timepickerCurrent_fontSize }} type="text" />
+
+                                        {allowMinuteInput === false && (
+                                            <div className="timepicker_wrapper_icon" style={{ bottom: styling.icondown_bottom }} >
+                                                <img src={Arrow_down} alt="arrow_down" className="timepicker_icon" style={{ width: styling.timepickericon_width }} onClick={() => changeMinutes('MINUS')} />
+                                            </div>
+                                        )}
                                     </div>
-                                    {allowMinuteInput === false && (
-                                        <div className="timepicker_wrapper_icon" style={{ bottom: styling.icondown_bottom }} >
-                                            <img src={Arrow_down} alt="arrow_down" className="timepicker_icon" style={{ width: styling.timepickericon_width }} onClick={() => changeMinutes('MINUS')} />
-                                        </div>
-                                    )}
                                 </div>
                             </div>
                         </div>
@@ -472,25 +471,28 @@ const TimePicker = (props) => {
                             <div className="tp_row tp_justify-content-evenly">
                                 {timeFormat === 12 && (
                                     <div className="tp_col-5  tp_d-flex tp_justify-content-center tp_align-items-center tp_position-relative  ">
-                                        <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }}>
-                                            <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={changePeriod} />
-                                        </div>
+
                                         <div>
+                                            <div className="timepicker_wrapper_icon" style={{ top: styling.iconup_top }}>
+                                                <img src={Arrow_up} className="timepicker_icon" style={{ width: styling.timepickericon_width }} alt="arrow_up" onClick={changePeriod} />
+                                            </div>
+
                                             <button className="timepicker-current" style={{ fontSize: styling.timepickerCurrent_fontSize }} >
                                                 {period}
                                             </button>
+                                            <div className="timepicker_wrapper_icon " style={{ bottom: styling.icondown_bottom }} >
+                                                <img src={Arrow_down} alt="arrow_down" className="timepicker_icon" style={{ width: styling.timepickericon_width }} onClick={changePeriod} />
+                                            </div>
                                         </div>
 
-                                        <div className="timepicker_wrapper_icon " style={{ bottom: styling.icondown_bottom }} >
-                                            <img src={Arrow_down} alt="arrow_down" className="timepicker_icon" style={{ width: styling.timepickericon_width }} onClick={changePeriod} />
-                                        </div>
+
                                     </div>
                                 )}
                                 <div className="tp_col-3 tp_d-flex tp_justify-content-center tp_align-items-center  ">
                                     <div>
-                                        <button className="ok_btn" style={{ fontSize: styling.okbtn_fontSize, padding: styling.okbtn_padding, }} onClick={updateTime}>
+                                        {/* <button className="ok_btn" style={{ fontSize: styling.okbtn_fontSize, padding: styling.okbtn_padding, }} onClick={updateTime}>
                                             OK
-                                        </button>
+                                        </button> */}
                                     </div>
 
                                 </div>
