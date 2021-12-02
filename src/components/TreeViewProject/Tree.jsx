@@ -101,7 +101,7 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
 
 
-        // recursivenode(nodes)
+        //   console.log("recursive node", recursivenode(nodes));
 
 
         let findDeep = function (data, activity) {
@@ -135,27 +135,38 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
 
         //console.log(findDeep(filternodes, e.target.value))
         // changeState(findDeep(filternodes, e.target.value))
-
+        function chfilnodes(filternodes, value) {
+            const ffa = filternodes.map((anodes) => {
+                let aanodes = JSON.stringify(anodes)
+                if (aanodes.includes(value)) {
+                    let parentcnode = JSON.parse(aanodes)
+                    parentcnode.status = true
+                    return parentcnode
+                }
+                else {
+                    aanodes = JSON.parse(aanodes)
+                    return aanodes
+                }
+            })
+            return ffa
+        }
         function filtnodes(filternodes, checked, value) {
             const ddd = filternodes.map((fnodes) => {
                 let fsnodes = JSON.stringify(fnodes)
                 if (fsnodes.includes(value)) {
                     let parentnode = JSON.parse(fsnodes)
-                    parentnode.status = true
+                    parentnode.status = checked
+
+                    if (value === parentnode.value) {
+                        // console.log("parentnode.status", parentnode.status);
+                        const dxdd = recursivenode(nodes)
+                        console.log("dxdd", dxdd);
+                        parentnode.nodes = dxdd.nodes
+
+                    }
+
                     if (parentnode.nodes && parentnode.nodes.length > 0) {
-                        // parentnode.nodes = parentnode.nodes.map((child, i) => {
-                        //     let fcnodes = JSON.stringify(child)
-                        //     if (fcnodes.includes(fcnodes)) {
-                        //         let childnode = JSON.parse(fcnodes)
-                        //         childnode.status = checked
-
-                        //     } else {
-                        //         fcnodes = JSON.parse(fcnodes)
-                        //         return fcnodes
-                        //     }
-
-                        // })
-                        console.log("checked", checked);
+                        parentnode.nodes = filtnodes(parentnode.nodes, checked, value)
                     }
                     return parentnode
                 }
@@ -167,10 +178,10 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             return ddd
         }
         console.log("nodes", nodes);
-        console.log("findparentnode", filtnodes(filternodes, !nodes.status, e.target.value));
+        //  console.log("findparentnode", filtnodes(filternodes, e.target.checked, e.target.value));
 
         // findNode(filternodes, e.target.value, e.target.checked)
-        // changeState(filtnodes(filternodes, e.target.checked, e.target.value))
+        changeState(filtnodes(filternodes, e.target.checked, e.target.value))
 
     }
 
