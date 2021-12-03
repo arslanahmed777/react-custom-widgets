@@ -1,6 +1,6 @@
 const nodes = [
    {
-      "value": "animals",
+      "value": "Animals",
       "text": "animals",
       "status": false,
       "nodes": [

@@ -1,64 +1,178 @@
 
-import React, { useState } from "react";
+import React from "react";
 import "./Tree.css";
 
 // ******************************** CUSTOM HELPER FUNCTIONS *********************
 
 
-function recursivenode(nodes) {
-    nodes.status = !nodes.status
-    if (nodes.nodes && nodes.nodes.length > 0) {
-        nodes.nodes.forEach(element => {
-            element.status = !nodes.status
-            recursivenode(element)
-        });
-    }
-    return nodes
-}
-const findNode = (nodes, v, status) => {
-    let nonMatch = [];
-    let foundMatch = [];
-    let updatedData = [];
-    let parentNodes = (nodes) => {
-        nodes.forEach((node) => {
-            if (node.value !== v) {
-                nonMatch.push(node);
+// function recursivenode(nodes) {
+//     nodes.status = !nodes.status
+//     if (nodes.nodes && nodes.nodes.length > 0) {
+//         nodes.nodes.forEach(element => {
+//             element.status = !nodes.status
+//             recursivenode(element)
+//         });
+//     }
+//     return nodes
+// }
+// const findNode = (nodes, v, status) => {
+//     let nonMatch = [];
+//     let foundMatch = [];
+//     let updatedData = [];
+//     let parentNodes = (nodes) => {
+//         nodes.forEach((node) => {
+//             if (node.value !== v) {
+//                 nonMatch.push(node);
 
-                if (node.nodes) parentNodes(node.nodes);
+//                 if (node.nodes) parentNodes(node.nodes);
+//             } else {
+//                 foundMatch.push(node);
+//             }
+//         });
+//     };
+//     parentNodes(nodes);
+
+//     console.log("nonMatch", nonMatch);
+//     console.log("foundMatch", foundMatch);
+//     //findParentAndChild(foundMatch[0]?.value);
+
+//     // return Array.from(new Set([...nodes, updatedData[0]]));
+// };
+
+
+
+let findNode = (nodes, value, status) => {
+    let foundObj = null;
+    nodes.forEach((__) => {
+        if (__.value === value) {
+            foundObj = __;
+        } else {
+            let searchRecursive = (node) => {
+                if (node.nodes) {
+                    node.nodes.forEach((_) => {
+                        if (_.value === value) {
+                            foundObj = __;
+                        } else {
+                            searchRecursive(_);
+                        }
+                    });
+                }
+            };
+            searchRecursive(__);
+        }
+    });
+    let findValue = (nextNodes, value, status) => {
+        let foundNodes = [];
+
+        let recursiveFind = (nextNodes, value) => {
+            if (nextNodes.value === value) {
+                foundNodes.push(nextNodes);
             } else {
-                foundMatch.push(node);
+                if (nextNodes.nodes) {
+                    nextNodes.nodes.forEach((_) => {
+                        if (_.value === value) {
+                            foundNodes.push(_);
+                        } else {
+                            if (_.nodes) {
+                                recursiveFind(_, value);
+                            }
+                        }
+                    });
+                }
             }
-        });
+        };
+        let setStatus = (nextNodes, { value }, status) => {
+            let recursiveTrue = (nextNodes, value) => {
+                let parentNode = nextNodes;
+                let setRecursiveChild = (node, b) => {
+                    node.status = b;
+                    if (node.nodes) {
+                        node.nodes.forEach((_) => {
+                            setRecursiveChild(_, b);
+                        });
+                    }
+                };
+                let setRecursiveTrue = (node) => {
+                    if (node.value === value) {
+                        let setRecursiveParent = (node, value) => {
+                            if (node.nodes) {
+                                if (node.nodes.some((v) => v.value === value)) {
+                                    node.status = true;
+                                    setRecursiveParent(parentNode, node.value);
+                                } else {
+                                    if (node.nodes) {
+                                        node.nodes.forEach((_) => {
+                                            setRecursiveParent(_, value);
+                                        });
+                                    }
+                                }
+                            }
+                        };
+                        setRecursiveChild(node, true);
+                        setRecursiveParent(parentNode, value);
+                    } else {
+                        if (node.nodes) {
+                            node.nodes.forEach((_) => {
+                                setRecursiveTrue(_);
+                            });
+                        }
+                    }
+                };
+                let setRecursiveFalse = (node) => {
+                    if (node.value === value) {
+                        node.status = false;
+                        setRecursiveChild(node, false);
+                    } else {
+                        if (node.nodes) {
+                            node.nodes.forEach((_) => {
+                                setRecursiveFalse(_);
+                            });
+                        }
+                    }
+                };
+
+                if (parentNode.value === value) {
+                    parentNode.status = status;
+                    setRecursiveTrue(parentNode);
+                }
+                if (status === true) {
+                    setRecursiveTrue(parentNode);
+                } else {
+                    setRecursiveFalse(parentNode);
+                }
+                return parentNode;
+            };
+
+            recursiveTrue(nextNodes, value, status);
+        };
+
+        recursiveFind(nextNodes, value);
+        setStatus(nextNodes, foundNodes[0], status);
+        if (status && nextNodes.value === value) {
+            nextNodes.status = status;
+        } else if (nextNodes.value === value && !status) {
+            nextNodes.status = status;
+        } else {
+            nextNodes.status = true;
+        }
+        return nextNodes;
     };
-
-
-
-
-
-
-    parentNodes(nodes);
-
-    console.log("nonMatch", nonMatch);
-    console.log("foundMatch", foundMatch);
-    //findParentAndChild(foundMatch[0]?.value);
-
-    // return Array.from(new Set([...nodes, updatedData[0]]));
+    if (foundObj) {
+        findValue(foundObj, value, status);
+        return nodes;
+    }
 };
 
 
 
-
-
-
-
-const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleExpand, changeState }) => {
+const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleExpand, changeState, fontSize, backgroundColor, color, horizontalSpacing, verticalSpacing, borderLeft, allowCheck }) => {
     column = 12 / column
     return (
-        <div className="row">
+        <div className="row" style={{ fontSize: fontSize, backgroundColor: backgroundColor, color: color }}>
             {filternodes.map((items, i) => {
                 return (
-                    <div key={i} className={'col-lg-' + column + ' form-check'}>
-                        <TreeNode filternodes={filternodes} nodes={items} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} />
+                    <div key={i} className={`xcvd col-lg-${column}`} style={{ overflowX: "auto" }}>
+                        <TreeNode filternodes={filternodes} nodes={items} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
                     </div>
                 )
             })}
@@ -70,22 +184,17 @@ const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleE
 
 const Tree1 = (props) => {
     return (
-        <div className="d-tree">
-            <ul className="d-flex d-tree-container flex-column">
-                {props.data.map((items, i) => (
-                    <TreeNode filternodes={props.filternodes} key={i} nodes={items} openIcon={props.openIcon} closeIcon={props.closeIcon} expanded={props.expanded} handleExpand={props.handleExpand} changeState={props.changeState} />
-                ))}
-            </ul>
-        </div>
+        <>
+            {props.data.map((items, i) => (
+                <TreeNode filternodes={props.filternodes} key={i} nodes={items} openIcon={props.openIcon} closeIcon={props.closeIcon} expanded={props.expanded} handleExpand={props.handleExpand} changeState={props.changeState} fontSize={props.fontSize} horizontalSpacing={props.horizontalSpacing} verticalSpacing={props.verticalSpacing} borderLeft={props.borderLeft} allowCheck={props.allowCheck} />
+            ))}
+
+        </>
     );
 };
 
-const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExpand, changeState }) => {
-
-    const [childVisible, setChildVisiblity] = useState(false);
-
+const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExpand, changeState, fontSize, horizontalSpacing, verticalSpacing, borderLeft, allowCheck }) => {
     const hasChild = nodes.nodes ? true : false;
-
     const handleVisibility = (e) => {
         let newArray = expanded
         if (expanded.includes(e)) {
@@ -94,138 +203,44 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             newArray.push(e)
         }
         handleExpand(newArray)
-        setChildVisiblity((visible) => !visible)
+
     }
 
     const handleCheck = (e) => {
-
-
-
-        //   console.log("recursive node", recursivenode(nodes));
-
-
-        let findDeep = function (data, activity) {
-
-            const newdata = data.map(function (e) {
-                if (e.value === activity) {
-
-                    return recursivenode(nodes)
-                }
-                else {
-                    return e
-                }
-
-                // if (e.value === activity) {
-                //     console.log("ghgggg");
-                //     //e.nodes = recursivenode(nodes)
-                //     return data
-                // }
-                // else if (e.nodes && e.nodes.length > 0) {
-
-                //     return findDeep(e.nodes, e.value)
-                // }
-                // else {
-                //     return data
-                // }
-
-
-            })
-            return newdata
-        }
-
-        //console.log(findDeep(filternodes, e.target.value))
-        // changeState(findDeep(filternodes, e.target.value))
-        function chfilnodes(filternodes, value) {
-            const ffa = filternodes.map((anodes) => {
-                let aanodes = JSON.stringify(anodes)
-                if (aanodes.includes(value)) {
-                    let parentcnode = JSON.parse(aanodes)
-                    parentcnode.status = true
-                    return parentcnode
-                }
-                else {
-                    aanodes = JSON.parse(aanodes)
-                    return aanodes
-                }
-            })
-            return ffa
-        }
-        function filtnodes(filternodes, checked, value) {
-            const ddd = filternodes.map((fnodes) => {
-                let fsnodes = JSON.stringify(fnodes)
-                if (fsnodes.includes(value)) {
-                    let parentnode = JSON.parse(fsnodes)
-                    parentnode.status = checked
-
-                    if (value === parentnode.value) {
-                        // console.log("parentnode.status", parentnode.status);
-                        const dxdd = recursivenode(nodes)
-                        console.log("dxdd", dxdd);
-                        parentnode.nodes = dxdd.nodes
-
-                    }
-
-                    if (parentnode.nodes && parentnode.nodes.length > 0) {
-                        parentnode.nodes = filtnodes(parentnode.nodes, checked, value)
-                    }
-                    return parentnode
-                }
-                else {
-                    fsnodes = JSON.parse(fsnodes)
-                    return fsnodes
-                }
-            })
-            return ddd
-        }
-        console.log("nodes", nodes);
-        //  console.log("findparentnode", filtnodes(filternodes, e.target.checked, e.target.value));
-
-        // findNode(filternodes, e.target.value, e.target.checked)
-        changeState(filtnodes(filternodes, e.target.checked, e.target.value))
-
+        changeState(findNode(filternodes, e.target.value, e.target.checked))
     }
 
-
-
-
-
-
     return (
-        <li className="d-tree-node border-0">
-            <div className="d-flex" >
+        <>
+
+            <div className="d-flex" style={{ alignItems: "center", marginBottom: verticalSpacing }} >
                 {hasChild && (
-                    <button name={nodes.value} onClick={(e) => handleVisibility(nodes.value)} className="btn text-white p-0">
+                    <button name={nodes.value} onClick={(e) => handleVisibility(nodes.value)} style={{ fontSize: "inherit", height: "fit-content" }} className="treenav-btn p-0">
                         {/* {childVisible ? closeIcon : openIcon} */}
                         {expanded.includes(nodes.value) ? closeIcon : openIcon}
                     </button>
                 )}
-
                 <div className="col d-tree-head">
-                    <span>
-                        <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="m-2" />
-                        {nodes.text}
+                    <span style={{ display: "flex", alignItems: "end" }}>
+                        {allowCheck && (
+                            <span>
+                                <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="mx-2" style={{ width: `calc(${fontSize} - 8px)`, height: `calc(${fontSize} - 8px)` }} />
+                            </span>
+                        )}
 
+                        <span>{nodes.text}</span>
                     </span>
-
                 </div>
-
             </div>
-
             {expanded.includes(nodes.value) && (
-                <div className="d-tree-content">
-                    <ul className="d-flex d-tree-container flex-column">
-                        <Tree1 filternodes={filternodes} data={nodes.nodes} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} />
-                    </ul>
+                <div className="d-tree-content" style={{ marginLeft: borderLeft === "none" ? horizontalSpacing : `calc(${horizontalSpacing} - 12px )`, borderLeft: borderLeft, paddingLeft: borderLeft === "none" ? "0px" : "12px" }}>
+
+                    <Tree1 filternodes={filternodes} data={nodes.nodes} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
+
                 </div>
             )}
-            {/* {hasChild && childVisible && (
-                <div className="d-tree-content">
-                    <ul className="d-flex d-tree-container flex-column">
-                        <Tree1 filternodes={filternodes} data={nodes.nodes} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} />
-                    </ul>
-                </div>
-            )} */}
-        </li>
+
+        </>
     );
 };
 
