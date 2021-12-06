@@ -222,12 +222,13 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
                 )}
                 <div className="col d-tree-head">
                     <span style={{ display: "flex", alignItems: "end" }}>
-                        {allowCheck && (
-                            <span>
-                                <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="mx-2" style={{ width: `calc(${fontSize} - 8px)`, height: `calc(${fontSize} - 8px)` }} />
-                            </span>
-                        )}
+                        <span className="mx-1">
+                            {allowCheck && (
 
+                                <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="mx-1" style={{ width: `calc(${fontSize} - 8px)`, height: `calc(${fontSize} - 8px)` }} />
+
+                            )}
+                        </span>
                         <span>{nodes.text}</span>
                     </span>
                 </div>

@@ -226,14 +226,41 @@ const nodes = [
       "status": false,
       nodes: [
          {
-            "value": "floweringplants",
-            "text": "floweringplants",
+            "value": "seedmakers",
+            "text": "Seed Makers",
             "status": false,
-            nodes: null
+            nodes: [
+               {
+                  "value": "flowering",
+                  "text": "Flowering",
+                  "status": false,
+                  nodes: [
+                     {
+                        "value": "sunflowers",
+                        "text": "Sunflowers",
+                        "status": false,
+                        nodes: null
+                     },
+                  ]
+               },
+               {
+                  "value": "nonflowering",
+                  "text": "Non Flowering",
+                  "status": false,
+                  nodes: [
+                     {
+                        "value": "conifers",
+                        "text": "Conifers",
+                        "status": false,
+                        nodes: null
+                     },
+                  ]
+               }
+            ]
          },
          {
-            "value": "nonfloweringplants",
-            "text": "nonfloweringplants",
+            "value": "nonseedmakers",
+            "text": "Non Seed Makers",
             "status": false,
             nodes: null
          },

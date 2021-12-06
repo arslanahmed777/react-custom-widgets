@@ -81,13 +81,13 @@ const TreeView = () => {
                         column={2}
                         openIcon={< FaFolder style={{ color: "#e6c300" }} />}
                         closeIcon={<FaFolderOpen style={{ color: "#e6c300" }} />}
-                        fontSize={"20px"}
+                        fontSize={"18px"}
                         backgroundColor={"black"}
                         color={"white"}
                         horizontalSpacing={"37px"}
                         verticalSpacing={"5px"}
-                        borderLeft="none"
-                        allowCheck={true}
+                        borderLeft="1px dotted red"
+                        allowCheck={false}
                     />
                 </div>
                 <div className="col-12">
