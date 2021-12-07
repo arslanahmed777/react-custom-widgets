@@ -76,9 +76,9 @@ const TreeView = () => {
                         filternodes={Nodes}
                         expanded={expanded}
                         handleExpand={handleExpand}
-                        changeState={handleCheck}
+                        //changeState={handleCheck}
                         saveUserRights={handeleSave}
-                        column={2}
+                        column={4}
                         openIcon={< FaFolder style={{ color: "#e6c300" }} />}
                         closeIcon={<FaFolderOpen style={{ color: "#e6c300" }} />}
                         fontSize={"18px"}

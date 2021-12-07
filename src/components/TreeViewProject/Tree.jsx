@@ -3,44 +3,6 @@ import React from "react";
 import "./Tree.css";
 
 // ******************************** CUSTOM HELPER FUNCTIONS *********************
-
-
-// function recursivenode(nodes) {
-//     nodes.status = !nodes.status
-//     if (nodes.nodes && nodes.nodes.length > 0) {
-//         nodes.nodes.forEach(element => {
-//             element.status = !nodes.status
-//             recursivenode(element)
-//         });
-//     }
-//     return nodes
-// }
-// const findNode = (nodes, v, status) => {
-//     let nonMatch = [];
-//     let foundMatch = [];
-//     let updatedData = [];
-//     let parentNodes = (nodes) => {
-//         nodes.forEach((node) => {
-//             if (node.value !== v) {
-//                 nonMatch.push(node);
-
-//                 if (node.nodes) parentNodes(node.nodes);
-//             } else {
-//                 foundMatch.push(node);
-//             }
-//         });
-//     };
-//     parentNodes(nodes);
-
-//     console.log("nonMatch", nonMatch);
-//     console.log("foundMatch", foundMatch);
-//     //findParentAndChild(foundMatch[0]?.value);
-
-//     // return Array.from(new Set([...nodes, updatedData[0]]));
-// };
-
-
-
 let findNode = (nodes, value, status) => {
     let foundObj = null;
     nodes.forEach((__) => {
@@ -171,7 +133,7 @@ const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleE
         <div className="row" style={{ fontSize: fontSize, backgroundColor: backgroundColor, color: color }}>
             {filternodes.map((items, i) => {
                 return (
-                    <div key={i} className={`xcvd col-lg-${column}`} style={{ overflowX: "auto" }}>
+                    <div key={i} className={`scroll col-lg-${column}`} style={{ overflowX: "auto" }}>
                         <TreeNode filternodes={filternodes} nodes={items} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
                     </div>
                 )
@@ -179,8 +141,6 @@ const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleE
         </div>
     );
 };
-
-
 
 const Tree1 = (props) => {
     return (
@@ -203,16 +163,13 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             newArray.push(e)
         }
         handleExpand(newArray)
-
     }
 
     const handleCheck = (e) => {
         changeState(findNode(filternodes, e.target.value, e.target.checked))
     }
-
     return (
         <>
-
             <div className="d-flex" style={{ alignItems: "center", marginBottom: verticalSpacing }} >
                 {hasChild && (
                     <button name={nodes.value} onClick={(e) => handleVisibility(nodes.value)} style={{ fontSize: "inherit", height: "fit-content" }} className="treenav-btn p-0">
@@ -220,7 +177,7 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
                         {expanded.includes(nodes.value) ? closeIcon : openIcon}
                     </button>
                 )}
-                <div className="col d-tree-head">
+                <div>
                     <span style={{ display: "flex", alignItems: "end" }}>
                         <span className="mx-1">
                             {allowCheck && (
@@ -234,13 +191,10 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
                 </div>
             </div>
             {expanded.includes(nodes.value) && (
-                <div className="d-tree-content" style={{ marginLeft: borderLeft === "none" ? horizontalSpacing : `calc(${horizontalSpacing} - 12px )`, borderLeft: borderLeft, paddingLeft: borderLeft === "none" ? "0px" : "12px" }}>
-
+                <div style={{ marginLeft: borderLeft === "none" ? horizontalSpacing : `calc(${horizontalSpacing} - 12px )`, borderLeft: borderLeft, paddingLeft: borderLeft === "none" ? "0px" : "12px" }}>
                     <Tree1 filternodes={filternodes} data={nodes.nodes} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
-
                 </div>
             )}
-
         </>
     );
 };

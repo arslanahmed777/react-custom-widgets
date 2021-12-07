@@ -217,7 +217,7 @@ const nodes = [
                   ]
                },
             ]
-         }
+         },
       ]
    },
    {
@@ -270,7 +270,108 @@ const nodes = [
       "value": "cars",
       "text": "cars",
       "status": false,
-      nodes: null
+      nodes: [
+         {
+            "value": "toyota",
+            "text": "toyota",
+            "status": false,
+            nodes: [
+               {
+                  "value": "Avalon",
+                  "text": "Avalon",
+                  "status": false,
+                  nodes: null
+               },
+               {
+                  "value": "Camry",
+                  "text": "Camry",
+                  "status": false,
+                  nodes: null
+               },
+               {
+                  "value": "Corolla",
+                  "text": "Corolla",
+                  "status": false,
+                  nodes: null
+               },
+            ]
+         },
+         {
+            "value": "honda",
+            "text": "honda",
+            "status": false,
+            nodes: [
+               {
+                  "value": "Passport",
+                  "text": "Passport",
+                  "status": false,
+                  nodes: null
+               },
+               {
+                  "value": "City",
+                  "text": "City",
+                  "status": false,
+                  nodes: null
+               },
+            ]
+         },
+         {
+            "value": "Kia",
+            "text": "Kia",
+            "status": false,
+            nodes: [
+               {
+                  "value": "Sportage",
+                  "text": "Sportage",
+                  "status": false,
+                  nodes: null
+               },
+               {
+                  "value": "Soul",
+                  "text": "Soul",
+                  "status": false,
+                  nodes: null
+               },
+            ]
+         },
+      ]
+   },
+   {
+      "value": "Generarions",
+      "text": "Generarions",
+      "status": false,
+      nodes: [
+         {
+            "value": "1st generation",
+            "text": "1st generation",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "2nd generation",
+            "text": "2nd generation",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "3rd generation",
+            "text": "3rd generation",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "4th generation",
+            "text": "4th generation",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "5th generation",
+            "text": "5th generation",
+            "status": false,
+            nodes: null
+         },
+      ]
    }
 ]
 
