@@ -70,24 +70,25 @@ const TreeView = () => {
     };
     return (
         <div className="container">
-            <div className="row mt-3 d-flex justify-content-center">
+            <div className="row g-0 mt-3 d-flex justify-content-center">
                 <div className="col-lg-12 text-left   bg-dark ">
                     <Tree
                         filternodes={Nodes}
                         expanded={expanded}
                         handleExpand={handleExpand}
-                        //changeState={handleCheck}
-                        saveUserRights={handeleSave}
-                        column={4}
-                        openIcon={< FaFolder style={{ color: "#e6c300" }} />}
-                        closeIcon={<FaFolderOpen style={{ color: "#e6c300" }} />}
-                        fontSize={"18px"}
-                        backgroundColor={"black"}
-                        color={"white"}
-                        horizontalSpacing={"37px"}
-                        verticalSpacing={"5px"}
-                        borderLeft="1px dotted red"
-                        allowCheck={false}
+                        changeState={handleCheck}
+                    //saveTree={handeleSave}
+                    // column={12}
+                    // savebtnClass={"btn btn-success"}
+                    // expandIcon={<FaFolderOpen style={{ color: "#e6c300" }} />}
+                    // compressIcon={< FaFolder style={{ color: "#e6c300" }} />}
+                    // fontSize={"18px"}
+                    // backgroundColor={"lightblue"}
+                    // color={"black"}
+                    // horizontalSpacing={"14px"}
+                    // verticalSpacing={"5px"}
+                    // borderLeft={"1px dotted red"}
+                    // allowCheck={false}
                     />
                 </div>
                 <div className="col-12">

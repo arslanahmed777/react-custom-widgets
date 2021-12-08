@@ -1,5 +1,8 @@
 
 import React from "react";
+import PropTypes from 'prop-types';
+import folderClose from "./folderClose.svg"
+import folderOpen from "./folderOpen.svg"
 import "./Tree.css";
 
 // ******************************** CUSTOM HELPER FUNCTIONS *********************
@@ -127,17 +130,23 @@ let findNode = (nodes, value, status) => {
 
 
 
-const Tree = ({ filternodes = [], column, openIcon, closeIcon, expanded, handleExpand, changeState, fontSize, backgroundColor, color, horizontalSpacing, verticalSpacing, borderLeft, allowCheck }) => {
-    column = 12 / column
+const Tree = ({ filternodes = [], column, expandIcon, compressIcon, expanded, handleExpand, changeState, fontSize, backgroundColor, color, horizontalSpacing, verticalSpacing, borderLeft, allowCheck, saveTree, savebtnClass }) => {
+    //column = 12 / column
     return (
-        <div className="row" style={{ fontSize: fontSize, backgroundColor: backgroundColor, color: color }}>
+        <div className="rtc-row" style={{ fontSize: fontSize, backgroundColor: backgroundColor, color: color }}>
             {filternodes.map((items, i) => {
                 return (
-                    <div key={i} className={`scroll col-lg-${column}`} style={{ overflowX: "auto" }}>
-                        <TreeNode filternodes={filternodes} nodes={items} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
+                    <div key={i} className={`rtc-scroll rtc-col-${column}`} style={{ overflowX: "auto" }}>
+                        <TreeNode filternodes={filternodes} nodes={items} expandIcon={expandIcon} compressIcon={compressIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
                     </div>
                 )
             })}
+            {typeof saveTree === "function" && (
+                <div className="rtc-col-12">
+                    <button onClick={() => { saveTree(filternodes) }} className={savebtnClass}>Save</button>
+                </div>
+            )}
+
         </div>
     );
 };
@@ -146,14 +155,14 @@ const Tree1 = (props) => {
     return (
         <>
             {props.data.map((items, i) => (
-                <TreeNode filternodes={props.filternodes} key={i} nodes={items} openIcon={props.openIcon} closeIcon={props.closeIcon} expanded={props.expanded} handleExpand={props.handleExpand} changeState={props.changeState} fontSize={props.fontSize} horizontalSpacing={props.horizontalSpacing} verticalSpacing={props.verticalSpacing} borderLeft={props.borderLeft} allowCheck={props.allowCheck} />
+                <TreeNode filternodes={props.filternodes} key={i} nodes={items} expandIcon={props.expandIcon} compressIcon={props.compressIcon} expanded={props.expanded} handleExpand={props.handleExpand} changeState={props.changeState} fontSize={props.fontSize} horizontalSpacing={props.horizontalSpacing} verticalSpacing={props.verticalSpacing} borderLeft={props.borderLeft} allowCheck={props.allowCheck} />
             ))}
 
         </>
     );
 };
 
-const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExpand, changeState, fontSize, horizontalSpacing, verticalSpacing, borderLeft, allowCheck }) => {
+const TreeNode = ({ filternodes, nodes, expandIcon, compressIcon, expanded, handleExpand, changeState, fontSize, horizontalSpacing, verticalSpacing, borderLeft, allowCheck }) => {
     const hasChild = nodes.nodes ? true : false;
     const handleVisibility = (e) => {
         let newArray = expanded
@@ -170,21 +179,16 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
     }
     return (
         <>
-            <div className="d-flex" style={{ alignItems: "center", marginBottom: verticalSpacing }} >
+            <div className="rtc-d-flex" style={{ alignItems: "center", marginBottom: verticalSpacing }} >
                 {hasChild && (
-                    <button name={nodes.value} onClick={(e) => handleVisibility(nodes.value)} style={{ fontSize: "inherit", height: "fit-content" }} className="treenav-btn p-0">
-                        {/* {childVisible ? closeIcon : openIcon} */}
-                        {expanded.includes(nodes.value) ? closeIcon : openIcon}
+                    <button name={nodes.value} onClick={(e) => handleVisibility(nodes.value)} style={{ fontSize: "inherit", height: "fit-content" }} className="rtc-btn">
+                        {expanded.includes(nodes.value) ? expandIcon : compressIcon}
                     </button>
                 )}
                 <div>
                     <span style={{ display: "flex", alignItems: "end" }}>
-                        <span className="mx-1">
-                            {allowCheck && (
-
-                                <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="mx-1" style={{ width: `calc(${fontSize} - 8px)`, height: `calc(${fontSize} - 8px)` }} />
-
-                            )}
+                        <span className="rtc-mx-1">
+                            {allowCheck && <input value={nodes.value} name={nodes.value} onChange={(e) => handleCheck(e)} type="checkbox" checked={nodes.status} className="rtc-mx-1" style={{ width: `calc(${fontSize} - 8px)`, height: `calc(${fontSize} - 8px)` }} />}
                         </span>
                         <span>{nodes.text}</span>
                     </span>
@@ -192,11 +196,49 @@ const TreeNode = ({ filternodes, nodes, openIcon, closeIcon, expanded, handleExp
             </div>
             {expanded.includes(nodes.value) && (
                 <div style={{ marginLeft: borderLeft === "none" ? horizontalSpacing : `calc(${horizontalSpacing} - 12px )`, borderLeft: borderLeft, paddingLeft: borderLeft === "none" ? "0px" : "12px" }}>
-                    <Tree1 filternodes={filternodes} data={nodes.nodes} openIcon={openIcon} closeIcon={closeIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
+                    <Tree1 filternodes={filternodes} data={nodes.nodes} expandIcon={expandIcon} compressIcon={compressIcon} expanded={expanded} handleExpand={handleExpand} changeState={changeState} fontSize={fontSize} horizontalSpacing={horizontalSpacing} verticalSpacing={verticalSpacing} borderLeft={borderLeft} allowCheck={allowCheck} />
                 </div>
             )}
         </>
     );
+};
+
+// Specifies the default values for props:
+Tree.defaultProps = {
+    borderLeft: 'none',
+    color: 'black',
+    backgroundColor: 'white',
+    fontSize: '18px',
+    compressIcon: <img src={folderClose} alt="compressicon" />,
+    expandIcon: <img src={folderOpen} alt="expandicon" />,
+    column: 6,
+    allowCheck: true,
+    horizontalSpacing: "14px",
+    verticalSpacing: "5px",
+    saveTree: false,
+    savebtnClass: "rtc-save-button"
+};
+
+Tree.propTypes = {
+    borderLeft: PropTypes.string,
+    allowCheck: PropTypes.bool,
+    verticalSpacing: PropTypes.string,
+    horizontalSpacing: PropTypes.string,
+    color: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    fontSize: PropTypes.string,
+    compressIcon: PropTypes.element,
+    expandIcon: PropTypes.element,
+    column: PropTypes.number,
+    filternodes: PropTypes.array.isRequired,
+    expanded: PropTypes.array.isRequired,
+    handleExpand: PropTypes.func.isRequired,
+    changeState: PropTypes.func,
+    saveTree: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.bool,
+    ]),
+    savebtnClass: PropTypes.string
 };
 
 

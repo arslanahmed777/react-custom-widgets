@@ -372,7 +372,160 @@ const nodes = [
             nodes: null
          },
       ]
-   }
+   },
+
+   {
+      "value": "trignometery",
+      "text": "trignometery",
+      "status": false,
+      nodes: [
+         {
+            "value": "Sinθ",
+            "text": "Sinθ",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "Cosθ",
+            "text": "Cosθ",
+            "status": false,
+            nodes: null
+         },
+         {
+            "value": "Tanθ",
+            "text": "Sinθ",
+            "status": false,
+            nodes: null
+         },
+      ]
+   },
+   {
+      "value": "comapny hierarchy",
+      "text": "Comapny hierarchy",
+      "status": false,
+      nodes: [
+         {
+            "value": "Chief Executive Officer (CEO)",
+            "text": "Chief Executive Officer (CEO)",
+            "status": false,
+            nodes: [
+               {
+                  "value": "Chief Operating Officer (COO)",
+                  "text": "Chief Operating Officer (COO)",
+                  "status": false,
+                  nodes: [
+                     {
+                        "value": "President",
+                        "text": "President",
+                        "status": false,
+                        nodes: [
+                           {
+                              "value": "Executive Vice President",
+                              "text": "Executive Vice President",
+                              "status": false,
+                              nodes: [
+                                 {
+                                    "value": "Senior Vice President",
+                                    "text": "Senior Vice President",
+                                    "status": false,
+                                    nodes: [
+                                       {
+                                          "value": "Vice President",
+                                          "text": "Vice President",
+                                          "status": false,
+                                          nodes: [
+                                             {
+                                                "value": "Assistant Vice President",
+                                                "text": "Assistant Vice President",
+                                                "status": false,
+                                                nodes: [
+                                                   {
+                                                      "value": "Associate Vice President",
+                                                      "text": "Associate Vice President",
+                                                      "status": false,
+                                                      nodes: [
+                                                         {
+                                                            "value": "Senior Director",
+                                                            "text": "Senior Director",
+                                                            "status": false,
+                                                            nodes: [
+                                                               {
+                                                                  "value": "Assistant Director",
+                                                                  "text": "Assistant Director",
+                                                                  "status": false,
+                                                                  nodes: [
+                                                                     {
+                                                                        "value": "Manager",
+                                                                        "text": "Manager",
+                                                                        "status": false,
+                                                                        nodes: [
+                                                                           {
+                                                                              "value": "Middle Manager",
+                                                                              "text": "Middle Manager",
+                                                                              "status": false,
+                                                                              nodes: [
+                                                                                 {
+                                                                                    "value": "Permanent employees",
+                                                                                    "text": "Permanent employees",
+                                                                                    "status": false,
+                                                                                    nodes: null
+                                                                                 },
+                                                                                 {
+                                                                                    "value": "Contract employees",
+                                                                                    "text": "Contract employees",
+                                                                                    "status": false,
+                                                                                    nodes: null
+                                                                                 },
+                                                                                 {
+                                                                                    "value": "Part-time employees",
+                                                                                    "text": "Part-time employees",
+                                                                                    "status": false,
+                                                                                    nodes: null
+                                                                                 },
+                                                                                 {
+                                                                                    "value": "Freelancers",
+                                                                                    "text": "Freelancers",
+                                                                                    "status": false,
+                                                                                    nodes: null
+                                                                                 },
+                                                                                 {
+                                                                                    "value": "Contingent  employees",
+                                                                                    "text": "Contingent  employees",
+                                                                                    "status": false,
+                                                                                    nodes: null
+                                                                                 },
+                                                                              ]
+                                                                           }
+                                                                        ]
+                                                                     }
+                                                                  ]
+                                                               }
+                                                            ]
+                                                         }
+                                                      ]
+                                                   }
+                                                ]
+                                             }
+                                          ]
+                                       }
+                                    ]
+                                 }
+                              ]
+                           }
+                        ]
+                     }
+                  ]
+               }
+            ]
+         },
+      ]
+   },
+   {
+      "value": "functions",
+      "text": "functions",
+      "status": false,
+      nodes: null
+   },
 ]
 
 export default nodes
