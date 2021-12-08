@@ -71,7 +71,7 @@ const TreeView = () => {
     return (
         <div className="container">
             <div className="row g-0 mt-3 d-flex justify-content-center">
-                <div className="col-lg-12 text-left   bg-dark ">
+                <div className="col-lg-12 text-left bg-dark ">
                     <Tree
                         filternodes={Nodes}
                         expanded={expanded}
