@@ -40,7 +40,7 @@ const Chat = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-3 frame">
+        <div className="col-md-6 frame">
           <ul>
             {chats.map((chat, i) => {
               return (
