@@ -5,6 +5,6 @@ const TOKEN = () => {
   return token;
 };
 
-const HOSTNAME = "http://localhost:5000";
+const HOSTNAME = "http://localhost:8000";
 
 export { TOKEN, HOSTNAME };

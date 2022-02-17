@@ -14,6 +14,7 @@ const BlogsPage = React.lazy(() => import("./Pages/BlogsPage"))
 const TimePickerPage = React.lazy(() => import("./Pages/TimePickerPage"))
 const TreeViewPage = React.lazy(() => import("./Pages/TreeViewPage"))
 const CheckboxTreePage = React.lazy(() => import("./Pages/CheckboxTreePage"))
+const DataGridPage = React.lazy(() => import("./Pages/DataGridPage"))
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/timepicker" render={() => currentUser ? <TimePickerPage /> : <Redirect to="/login" />} />
           <Route exact path="/treeview" render={() => currentUser ? <TreeViewPage /> : <Redirect to="/login" />} />
           <Route exact path="/checkboxtree" render={() => currentUser ? <CheckboxTreePage /> : <Redirect to="/login" />} />
+          <Route exact path="/datagrid" render={() => currentUser ? <DataGridPage /> : <Redirect to="/login" />} />
 
           {/* <ProtectedRoute exact path="/">
             <HomePage />

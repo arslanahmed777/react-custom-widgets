@@ -39,6 +39,11 @@ export const SidebarData = [
         ]
     },
     {
+        title: 'Data grid Table',
+        path: '/datagrid',
+        icon: <VsIcons.VscListTree />,
+    },
+    {
         title: 'Chat',
         path: '/chat',
         icon: <FaIcons.FaRocketchat />,
