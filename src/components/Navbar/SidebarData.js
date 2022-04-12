@@ -38,11 +38,7 @@ export const SidebarData = [
 
         ]
     },
-    {
-        title: 'Data grid Table',
-        path: '/datagrid',
-        icon: <VsIcons.VscListTree />,
-    },
+
     {
         title: 'Chat',
         path: '/chat',
@@ -66,6 +62,11 @@ export const SidebarData = [
     {
         title: 'Checkbox tree',
         path: '/checkboxtree',
+        icon: <VsIcons.VscListTree />,
+    },
+    {
+        title: 'Data Grid',
+        path: '/datagrid',
         icon: <VsIcons.VscListTree />,
     }
 ];

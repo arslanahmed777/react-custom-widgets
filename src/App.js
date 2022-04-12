@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from './redux/User/User.Selectors';
 import './App.css'
+import DataGridPage from './Pages/DataGridPage';
 const Navbar = React.lazy(() => import("./components/Navbar/Navbar"));
 const HomePage = React.lazy(() => import("./Pages/HomePage"));
 const PaginationPage = React.lazy(() => import("./Pages/PaginationPage"));
@@ -14,7 +15,7 @@ const BlogsPage = React.lazy(() => import("./Pages/BlogsPage"))
 const TimePickerPage = React.lazy(() => import("./Pages/TimePickerPage"))
 const TreeViewPage = React.lazy(() => import("./Pages/TreeViewPage"))
 const CheckboxTreePage = React.lazy(() => import("./Pages/CheckboxTreePage"))
-const DataGridPage = React.lazy(() => import("./Pages/DataGridPage"))
+
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/treeview" render={() => currentUser ? <TreeViewPage /> : <Redirect to="/login" />} />
           <Route exact path="/checkboxtree" render={() => currentUser ? <CheckboxTreePage /> : <Redirect to="/login" />} />
           <Route exact path="/datagrid" render={() => currentUser ? <DataGridPage /> : <Redirect to="/login" />} />
+
 
           {/* <ProtectedRoute exact path="/">
             <HomePage />
