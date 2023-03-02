@@ -19,7 +19,7 @@ const CheckboxTreePage = React.lazy(() => import("./Pages/CheckboxTreePage"))
 
 
 function App() {
-  const currentUser = useSelector(selectCurrentUser);
+  const currentUser = true
 
   return (
     <>
